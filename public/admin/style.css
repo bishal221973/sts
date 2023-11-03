@@ -1,0 +1,112 @@
+.circle {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    top: -8px;
+    right: 10px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    text-transform: uppercase;
+    overflow: hidden;
+}
+.circle img{
+    height: 40px;
+    width: 40px;
+}
+
+.form-control {
+    height: 45px;
+}
+.custom-file{
+    height: 45px;
+}
+.custom-file-label{
+    height: 45px;
+    padding-top: 10px;
+}
+.setting{
+    height: 70vh;
+}
+.setting .right-border{
+    border-right: 1px solid #ccc;
+    padding-right: 20px;
+}
+.setting-menu{
+    position: relative;
+    display: flex;
+    width: 100% !important;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-radius: 5px;
+    color: #333;
+    transition: all ease 1s;
+    margin-bottom: 5px;
+}
+.setting-menu:hover{
+    background-color: #ccc;
+    color: #000;
+}
+.setting-menu.active{
+    background-color: #ccc;
+    color: #000;
+}
+.setting-detail-box{
+    background-color: #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-top: 20px;
+}
+
+.setting-detail-box h5{
+    font-size: 18px !important;
+}
+.setting-detail-box p{
+    font-size: 17px;
+}
+.setting-detail-box img{
+    height: 60px;
+    margin-top: 5px;
+}
+.seting-container{
+    height: 100%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+.imgPicker{
+    position: relative;
+    display: block;
+    height: 100%;
+    width: 100%;
+    cursor: pointer;
+    opacity: 0;
+    z-index: 2;
+}
+.no-img{
+    z-index: 1;
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px dashed #838181;
+    border-radius: 5px;
+}
+.myTab{
+    background-color: #ccc;
+    padding: 10px;
+    margin-right: 10px;
+    border-radius: 10px;
+    color: #000;
+}
+.myTab.active{
+    background-color: aquamarine;
+}
