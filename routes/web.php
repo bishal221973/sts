@@ -40,3 +40,4 @@ Route::post('book', [App\Http\Controllers\BookingController::class,'book'])->nam
 Route::get('booked/{id}',[BookingController::class,'booked'])->name('booked');
 Route::resource('users', App\Http\Controllers\UserController::class);
 Route::get('booked-seat-list/{id}',[BookingController::class,'bookedSeat'])->name('bookedSeat');
+Route::get('report',[BookingController::class,'report'])->name('report');

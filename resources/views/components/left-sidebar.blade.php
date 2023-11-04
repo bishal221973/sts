@@ -90,6 +90,15 @@
                     </a>
 
                 </li>
+                <li class="nav-item">
+                    <a href="{{route('report')}}" class="nav-link">
+                        <i class="nav-icon fas fa-users"></i>
+                        <p>
+                            Report
+                        </p>
+                    </a>
+
+                </li>
 
 
             </ul>

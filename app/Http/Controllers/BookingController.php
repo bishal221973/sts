@@ -79,4 +79,14 @@ class BookingController extends Controller
         $seats=BookedSeat::with('book')->where('movie_id', $id)->get();
         return view('booking.bookedSeat',compact('movie','seats'));
     }
+    public function report(){
+        $reports=Book::with('bookedSeat','shows.movie.movie_has_tax.tax')->get();
+        //  return $reports = DB::table('booked_seats')
+        // ->select('*')
+        // ->join('books','books.id','=','booked_seats.book_id')
+        // // ->where('movie_id', $id)
+        // ->get()
+        // ->groupBy('phone,created_at');
+        return view('report',compact('reports'));
+    }
 }

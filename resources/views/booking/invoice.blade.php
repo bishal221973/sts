@@ -22,7 +22,7 @@
                 <div class="col-lg-4">
                     <div class="card">
                         <div class="card-header">
-                            <button class="btn btn-warning">Print</button>
+                            <button class="btn btn-warning" onclick="window.print()">Print</button>
                         </div>
                         <div class="card-body">
                             <label class="font-weight-normal col-12 text-center m-0 p-0">Invoice</label>

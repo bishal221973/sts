@@ -120,7 +120,7 @@
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
-                                <table id="example2" class="table table-bordered table-hover">
+                                <table id="button" class="table table-bordered table-hover">
                                     <thead>
                                         <tr>
                                             <th>SN</th>
@@ -149,6 +149,10 @@
                                                             <button type="submit"
                                                                 class="btn btn-danger ml-2">Delete</button>
                                                         </form>
+                                                    </td>
+                                                    @else
+                                                    <td>
+                                                        Not Allowed
                                                     </td>
                                                 @endif
                                             </tr>
