@@ -49,6 +49,7 @@
         margin: 0 auto;
         /* Center the grid container */
     }
+
     .grid1 {
         display: grid;
         grid-template-columns: repeat(18, 1fr);
@@ -63,43 +64,52 @@
 
     /* Style the grid items */
     .grid-item {
-            background-color: #909090;
+        background-color: #909090;
         color: #fff;
         padding: 1px;
         text-align: center;
         cursor: pointer;
         position: relative;
     }
-    .opacity-0{
+
+    .opacity-0 {
         opacity: 0;
         cursor: default;
         pointer-events: none;
     }
-    .top-item{
+
+    .top-item {
         width: max-content !important;
         padding-left: 10px;
         padding-right: 10px;
     }
-    .top-item div{
+
+    .top-item div {
         height: 20px;
         width: 20px;
     }
-    .top-item .available{
+
+    .top-item .available {
         background-color: #909090;
     }
-    .top-item .selected{
+
+    .top-item .selected {
         background-color: green;
     }
-    .top-item .booked{
+
+    .top-item .booked {
         background-color: brown;
     }
-    .top-item .sold{
+
+    .top-item .sold {
         background-color: red;
     }
-    .top-menu-selected{
+
+    .top-menu-selected {
         box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
     }
-    .screen{
+
+    .screen {
         background-color: brown;
         margin-top: 20px;
         height: 100px;
@@ -108,9 +118,9 @@
         color: #fff;
     }
 
-    .grid-item input{
+    .grid-item input {
         position: absolute;
-        display:block;
+        display: block;
         top: 0;
         left: 0;
         height: 100%;
@@ -118,40 +128,48 @@
         cursor: pointer;
         opacity: 0;
     }
-    .grid-item.isChecked{
+
+    .grid-item.isChecked {
         background-color: green !important;
     }
-    .grid-item.booked{
+
+    .grid-item.booked {
         background-color: brown !important;
-        cursor:none !important;
+        cursor: none !important;
         pointer-events: none !important;
     }
-    .zoom{
+
+    .zoom {
         cursor: pointer;
         overflow: hidden;
         border-radius: 10px;
         position: relative;
     }
-    .movieThumbnail{
+
+    .movieThumbnail {
         height: 300px;
         width: 250px;
         background-position: center;
-        background-size:cover;
+        background-size: cover;
         transition: 1s;
     }
-    .zoom:hover .movieThumbnail{
+
+    .zoom:hover .movieThumbnail {
         transform: scale(1.1);
     }
-    .movieDetail{
+
+    .movieDetail {
         position: absolute;
-        bottom:-150px;
+        bottom: -150px;
         background-color: rgba(0, 0, 0, 0.5);
         transition: 1s;
     }
-    .zoom:hover .movieDetail{
+
+    .zoom:hover .movieDetail {
         bottom: 0;
     }
-    .movieSeatCount{
+
+    .movieSeatCount {
         position: absolute;
         top: 5px;
         right: 0;
@@ -166,16 +184,147 @@
         border-bottom-left-radius: 20px;
         color: #fff;
     }
-    .cursur-pointer{
+
+    .cursur-pointer {
         cursor: pointer;
     }
-    #imagePreview{
+
+    #imagePreview {
         position: absolute;
-        top:0;
+        top: 0;
         height: 355px;
         border: 1px dashed #ccc;
         background-size: cover;
         background-repeat: no-repeat;
         background-position: center;
     }
+</style>
+
+
+
+<style>
+    ::selection {
+        color: #ffffff;
+        background-color: #31285C;
+    }
+
+    .login-container{
+        padding-top: 10%;
+        /* padding: 0;
+        margin: 0; */
+        /* font-family: 'Outfit', sans-serif; */
+        box-sizing: border-box;
+        text-decoration: none;
+        /* width: 100vw !important; */
+    }
+
+    .login-container a {
+        color: #31285C;
+    }
+
+
+
+    .login-container .row {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        /* background-color: #F0F0F0; */
+        padding-top: 20px;
+    }
+
+    .login-container .wrapper {
+        width: 320px;
+        min-height: 100px;
+        background-color: #FFFFFF;
+        border-radius: 5px;
+        box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.05);
+        padding: 30px;
+    }
+
+    .login-container .input-field {
+        width: 100%;
+        height: 45px;
+        border: none;
+        padding: 10px;
+        background-color: #eeeeee;
+        color: gray;
+        outline: none;
+        font-size: 15px;
+        margin-bottom: 20px;
+        transition: .5s;
+        border-radius: 5px;
+    }
+
+
+
+    .login-container .heading {
+        color: #3B3663;
+        margin-bottom: 20px;
+    }
+
+    .login-container .heading p {
+        color: #AAA8BB;
+    }
+
+    .login-container .heading i {
+        font-size: 30px;
+        color: #4D61FC;
+    }
+
+    .login-container label {
+        color: #AAA8BB;
+        font-weight: 400;
+    }
+
+    .login-container button {
+        width: 100%;
+        height: 45px;
+        border: none;
+        color: #FFFFFF;
+        background-color: #31285C;
+        border-radius: 5px;
+        font-size: 17px;
+        font-weight: 500;
+        transition: 0.3s;
+    }
+
+    .login-container button:hover {
+        background-color: #31283B;
+    }
+
+    .login-container .row {
+        min-width: 5px;
+        min-height: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 10px;
+        font-size: 15px;
+    }
+
+    .login-container .custom-checkbox {
+        width: 17px;
+        height: 17px;
+        border-radius: 5px;
+        background-color: #eeeeee;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 10px;
+        margin-right: 5px;
+    }
+
+    .login-container input[type=checkbox]:checked~.custom-checkbox {
+        background-color: #31285C;
+    }
+
+    .login-container input[type=checkbox]:checked~.custom-checkbox::before {
+        font-family: "Font Awesome 5 Free";
+        content: "\f00c";
+        display: inline-block;
+        font-weight: 900;
+        color: #ffffff;
+    }
+
 </style>

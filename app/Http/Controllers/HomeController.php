@@ -37,6 +37,7 @@ class HomeController extends Controller
         ->select('movie_id', DB::raw('count(*) as seat_count'))
         ->groupBy('movie_id')
         ->orderBy('seat_count', 'desc')
+        ->limit(3)
         ->get();
     // ->orderBy('count', 'desc')
         $totalMovie=Movie::count();
