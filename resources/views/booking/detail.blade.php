@@ -87,7 +87,7 @@
 
             <div class="d-flex m-0 p-0" style="width:min-content">
                 @foreach ($dates as $key => $date)
-                    @if (today()->format('Y-m-d') < $date)
+                    @if (today()->format('Y-m-d') <= $date)
                         <a href="#" class="myTab {{ $date == $todayDate ? 'active' : '' }}"
                             data-date="{{ $date }}">
                             {{ $date }}
@@ -102,7 +102,7 @@
 
             </div>
 
-            <div class="col-12">
+            {{-- <div class="col-12">
                 @if ($showDates > 0)
                     <div class="card col-12" style="background-color: #d3d0d0">
                         <div class="card-body d-flex justify-content-center align-items-center" style="height: 200px">
@@ -110,7 +110,7 @@
                         </div>
                     </div>
                 @endif
-            </div>
+            </div> --}}
             <br>
 
         </div>

@@ -12,6 +12,10 @@ use Spatie\Permission\Commands\Show;
 
 class BookingController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function movieDetail($id)
     {
         $movie = Movie::with('type', 'language', 'movie_has_tag.tag', 'movie_has_tax.tax', "movieShow")->where('id', $id)->first();
@@ -44,11 +48,11 @@ class BookingController extends Controller
     public function book(Request $request)
     {
         $data = $request->validate([
-            'name' => 'required',
-            'email' => 'required',
-            'phone' => 'required',
-            'address' => 'required',
-            'show_id' => 'required',
+            'name' => 'nullable',
+            'email' => 'nullable',
+            'phone' => 'nullable',
+            'address' => 'nullable',
+            'show_id' => 'nullable',
         ]);
 
         $show = MovieShow::where('id', $request->show_id)->first();

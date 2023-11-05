@@ -57,27 +57,27 @@
                                                         @method('PUT')
                                                     @endisset
                                                     <div class="form-group">
-                                                        <label for="exampleInputPassword1">Name</label>
+                                                        <label for="exampleInputPassword1">Name *:</label>
                                                         <input type="text" name="name" class="form-control"
                                                             id="exampleInputPassword1" placeholder="Name"
                                                             value="{{ old('name', $user->name) }}" required>
                                                     </div>
 
                                                     <div class="form-group">
-                                                        <label for="exampleInputPassword1">Email</label>
+                                                        <label for="exampleInputPassword1">Email *:</label>
                                                         <input type="text" name="email" class="form-control"
                                                             id="exampleInputPassword1" placeholder="Email"
                                                             value="{{ old('email', $user->email) }}" required>
                                                     </div>
                                                     @if (!$user->id)
                                                         <div class="form-group">
-                                                            <label for="exampleInputPassword1">Password</label>
+                                                            <label for="exampleInputPassword1">Password *:</label>
                                                             <input type="text" name="password" class="form-control"
                                                                 id="exampleInputPassword1" placeholder="Password"
                                                                 value="{{ old('password', $user->password) }}" required>
                                                         </div>
                                                         <div class="form-group">
-                                                            <label for="exampleInputPassword1">Confirm Password</label>
+                                                            <label for="exampleInputPassword1">Confirm Password *:</label>
                                                             <input type="text" name="" class="form-control"
                                                                 id="exampleInputPassword1" placeholder="Confirm Password"
                                                                 value="{{ old('password', $user->password) }}" required>
@@ -93,7 +93,7 @@
                                                         </div>
 
                                                         <div class="form-group col">
-                                                            <label for="exampleInputPassword1">Contact</label>
+                                                            <label for="exampleInputPassword1">Contact *:</label>
                                                             <input type="text" name="contact" class="form-control"
                                                                 id="exampleInputPassword1" placeholder="Contact"
                                                                 value="{{ old('contact', $user->contact) }}" required>

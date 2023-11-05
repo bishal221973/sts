@@ -55,7 +55,7 @@
                                                         @method('PUT')
                                                     @endisset
                                                     <div class="form-group">
-                                                        <label for="exampleInputPassword1">Type</label>
+                                                        <label for="exampleInputPassword1">Type *:</label>
                                                         <input type="text" name="type" class="form-control"
                                                             id="exampleInputPassword1" placeholder="Type"
                                                             value="{{ old('type',$type->type) }}" required>

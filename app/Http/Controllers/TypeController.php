@@ -7,6 +7,10 @@ use Illuminate\Http\Request;
 use Str;
 class TypeController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index(Type $type)
     {
         $types = Type::latest()->get();

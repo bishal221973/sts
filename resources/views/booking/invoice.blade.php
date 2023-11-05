@@ -19,24 +19,24 @@
         </div>
         <section class="content">
             <div class="row">
-                <div class="col-lg-4">
+                <div class="invoice">
                     <div class="card">
                         <div class="card-header">
                             <button class="btn btn-warning" onclick="window.print()">Print</button>
                         </div>
                         <div class="card-body">
                             <label class="font-weight-normal col-12 text-center m-0 p-0">Invoice</label>
-                            <h4 class="col-12 text-center font-weight-bold m-0 p-0">STS Cinema</h4>
-                            <label class="col-12 text-center m-0 p-0">Santoshi Tole, Dhangadhi</label>
+                            <h4 class="col-12 text-center font-weight-bold m-0 p-0">{{settings()->get("org_full_name", $default = "STS Cinema")}}</h4>
+                            <label class="col-12 text-center m-0 p-0">{{settings()->get("org_address", $default = "Dhangadhi, Kailali")}}</label>
 
                             <div class="col-12 d-flex justify-content-between mt-2 mb-0">
                                 <div class="d-flex">
                                     <label class="font-weight-normal">S.N. :</label>
-                                    <h5>ART {{ $movie->id }}</h5>
+                                    <h5>ART 020-{{settings()->get("sn_number", $default = "0")+ $movie->id }}</h5>
                                 </div>
                                 <div class="d-flex">
                                     <label class="font-weight-normal">Vat No. :</label>
-                                    <h5>300224685</h5>
+                                    <h5>{{settings()->get("org_vat_number", $default = "123456789")}}</h5>
                                 </div>
                             </div>
 

@@ -53,14 +53,14 @@
                                     <li class="list-group-item">
                                         <b>Email</b> <a class="float-right">{{ Auth()->user()->email }}</a>
                                     </li>
-                                    <li class="list-group-item">
+                                    {{-- <li class="list-group-item">
                                         <b>Email Verified at</b>
                                         @if (Auth()->user()->email_verified_at)
                                             <a class="float-right">{{ Auth()->user()->email_verified_at }}</a>
                                         @else
                                             <a href="#" class="float-right"><u>Verify Your Mail</u></a>
                                         @endif
-                                    </li>
+                                    </li> --}}
                                     <li class="list-group-item">
                                         <b>Gender</b> <a
                                             class="float-right">{{ Auth()->user()->gender ? Auth()->user()->gender : 'Not Defined' }}</a>

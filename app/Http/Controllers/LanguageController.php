@@ -7,6 +7,10 @@ use Illuminate\Http\Request;
 use Str;
 class LanguageController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index(Language $language){
         $languages = Language::latest()->get();
         return view("movie.language",compact("languages","language"));

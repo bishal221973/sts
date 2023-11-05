@@ -45,7 +45,17 @@
                                 <h5 class="font-weight-bold text-uppercase m-0 p-0">Total Movies</h5>
                                 <div class="d-flex justify-content-end">
                                 </div>
-                                <label class="m-0 p-0" style="font-size: 40px">{{$totalMovie}}</label>
+                                <label class="m-0 p-0" style="font-size: 40px">{{ $totalMovie }}</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="card bg-warning cursur-pointer">
+                            <div class="card-body">
+                                <h5 class="font-weight-bold text-uppercase m-0 p-0">Total Shows</h5>
+                                <div class="d-flex justify-content-end">
+                                </div>
+                                <label class="m-0 p-0" style="font-size: 40px">{{ $totalShows }}</label>
                             </div>
                         </div>
                     </div>
@@ -55,17 +65,7 @@
                                 <h5 class="font-weight-bold text-uppercase m-0 p-0">Total Booked Seat</h5>
                                 <div class="d-flex justify-content-end">
                                 </div>
-                                <label class="m-0 p-0" style="font-size: 40px"> {{$bookedSet}} </label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="card bg-warning cursur-pointer">
-                            <div class="card-body">
-                                <h5 class="font-weight-bold text-uppercase m-0 p-0">Total Customer</h5>
-                                <div class="d-flex justify-content-end">
-                                </div>
-                                <label class="m-0 p-0" style="font-size: 40px">5</label>
+                                <label class="m-0 p-0" style="font-size: 40px"> {{ $bookedSet }} </label>
                             </div>
                         </div>
                     </div>
@@ -76,7 +76,7 @@
                                 <h5 class="font-weight-bold text-uppercase m-0 p-0">Total User</h5>
                                 <div class="d-flex justify-content-end">
                                 </div>
-                                <label class="m-0 p-0" style="font-size: 40px"> {{$user}} </label>
+                                <label class="m-0 p-0" style="font-size: 40px"> {{ $user }} </label>
                             </div>
                         </div>
                     </div>
@@ -89,19 +89,21 @@
                         $movie = \App\Models\Movie::where('id', $item->movie_id)->first();
                     @endphp
                     <div class="mx-2 zoom">
-                        <div class="movieThumbnail" style="background-image: url({{ asset('storage') }}{{ '/' }}{{ $movie->thumbnail }})">
+                        <div class="movieThumbnail"
+                            style="background-image: url({{ asset('storage') }}{{ '/' }}{{ $movie->thumbnail }})">
 
                         </div>
                         <div class="movieDetail col-12">
-                            <h3 class="m-0 p-0 col-12 text-center text-white font-weight-bold">{{$movie->movie_name}}</h3>
-                            <label class="col-12 text-center text-white font-weight-normal">({{$movie->movie_name}})</label>
+                            <h3 class="m-0 p-0 col-12 text-center text-white font-weight-bold">{{ $movie->movie_name }}</h3>
+                            <label
+                                class="col-12 text-center text-white font-weight-normal">({{ $movie->movie_name }})</label>
 
                             <div class="col-12 mb-3 d-flex justify-content-center">
                                 <a href="{{ route('movieDetail', $movie->id) }}" class="col-12 text-center">Book Now</a>
                             </div>
                         </div>
-                        <a href="{{route('bookedSeat',$item->movie_id)}}" class="movieSeatCount">
-                            {{$item->seat_count}} Seat booked
+                        <a href="{{ route('bookedSeat', $item->movie_id) }}" class="movieSeatCount">
+                            {{ $item->seat_count }} Seat booked
                         </a>
                         {{-- <img src="{{ asset('storage') }}{{ '/' }}{{ $movie->thumbnail }}" height="300px"
                             width="250px" alt="" style=""> --}}
@@ -113,7 +115,7 @@
 
                     <!-- /.card-header -->
                     <div class="card-body">
-                        <table id="example1" class="table table-bordered table-striped table-hover">
+                        <table id="button" class="table table-bordered table-striped table-hover">
                             <thead>
                                 <tr>
                                     <th>SN</th>

@@ -239,3 +239,24 @@
          }
      });
  </script>
+
+<script>
+    const fileInput = document.getElementById('fileInput');
+    const imagePreview = document.getElementById('imagePreview');
+
+    fileInput.addEventListener('change', function() {
+        const file = fileInput.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                imagePreview.style.display = 'block';
+                imagePreview.style.backgroundImage = `url('${event.target.result}')`;
+                document.getElementById('NoImg').style.display="none";
+            };
+            reader.readAsDataURL(file);
+        } else {
+            imagePreview.style.display = 'none';
+            imagePreview.style.backgroundImage = 'none';
+        }
+    });
+</script>

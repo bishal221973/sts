@@ -55,13 +55,13 @@
                                                         @method('PUT')
                                                     @endisset
                                                     <div class="form-group">
-                                                        <label for="exampleInputPassword1">Tax</label>
+                                                        <label for="exampleInputPassword1">Tax *:</label>
                                                         <input type="text" name="tax" class="form-control"
                                                             id="exampleInputPassword1" placeholder="Tax"
                                                             value="{{ old('tax',$tax->tax) }}" required>
                                                     </div>
                                                     <div class="form-group">
-                                                        <label for="exampleInputPassword1">Percentage (%)</label>
+                                                        <label for="exampleInputPassword1">Percentage (%) *:</label>
                                                         <input type="number" name="percentage" class="form-control"
                                                             id="exampleInputPassword1" placeholder="Percentage"
                                                             value="{{ old('percentage',$tax->percentage) }}" required>

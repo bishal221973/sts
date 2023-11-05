@@ -169,4 +169,13 @@
     .cursur-pointer{
         cursor: pointer;
     }
+    #imagePreview{
+        position: absolute;
+        top:0;
+        height: 355px;
+        border: 1px dashed #ccc;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+    }
 </style>

@@ -34,8 +34,8 @@
                                 <table id="example1" class="table table-bordered table-hover">
                                     <thead>
                                         <tr>
+                                            <th>#</th>
                                             <th>SN</th>
-                                            <th>User</th>
                                             <th>Movie</th>
                                             <th>Booked Date</th>
                                             <th>Seat</th>
@@ -57,7 +57,7 @@
                                             @endphp
                                             <tr>
                                                 <td>{{ $loop->iteration }}</td>
-                                                <td>{{ $report->name }} <br> ({{ $report->email }} /<br> {{ $report->phone }})
+                                                <td>ART 020-{{settings()->get("sn_number", $default = "0")+ $report->id }}
                                                 </td>
                                                 <td> {{ $report->shows->movie->movie_name }} </td>
                                                 <td> {{ $report->created_at }} </td>
@@ -76,7 +76,6 @@
 
                                                 <td>
                                                     @foreach ($report->shows->movie->movie_has_tax as $tax)
-                                                        {{-- {{}} --}}
                                                         @php
                                                             $totalTax = $totalTax + $tax->tax->percentage;
                                                         @endphp
@@ -106,8 +105,8 @@
                                             <th> RS. {{$total}} </th>
                                         </tr>
                                         <tr>
+                                            <th>#</th>
                                             <th>SN</th>
-                                            <th>User</th>
                                             <th>Movie</th>
                                             <th>Booked Date</th>
                                             <th>Seat</th>

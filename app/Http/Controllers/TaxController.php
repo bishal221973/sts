@@ -7,6 +7,10 @@ use Illuminate\Http\Request;
 
 class TaxController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index(Tax $tax){
         $taxs=Tax::latest()->get();
         return view('tax.index',compact('tax','taxs'));

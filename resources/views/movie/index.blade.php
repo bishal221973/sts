@@ -48,11 +48,11 @@
                         <div class="card-body">
                             <div class="row">
                                 <div style="width: 300px;position: relative;">
-                                    <input type="file" name="thumbnail" class="imgPicker">
-                                    <div class="no-img">
-                                        <label class="text-muted">Image (240 x 300)</label>
+                                    <input type="file" name="thumbnail" id="fileInput" class="imgPicker">
+                                    <div class="no-img" id="NoImg">
+                                        <label class="text-muted">Image</label>
                                     </div>
-                                    <img src="" alt="">
+                                    <img id="imagePreview" style="width: 300px" alt="">
                                 </div>
                                 <div class="col">
                                     <div class="row">
@@ -118,17 +118,17 @@
                                         <div class="col-xl-3">
                                             <div class="form-group">
                                                 <label for="exampleInputPassword1">Movie Duration *:</label>
-                                                <input type="time" name="duration" class="form-control"
-                                                    id="exampleInputPassword1" placeholder="Email"
+                                                <input type="text" name="duration" class="form-control"
+                                                    id="exampleInputPassword1" placeholder="2 Hour 30 Minute"
                                                     value="{{ old('duration', $movie->duration) }}" required>
                                             </div>
 
                                         </div>
                                         <div class="col-xl-3">
                                             <div class="form-group">
-                                                <label for="exampleInputPassword1">Movie Release Date</label>
+                                                <label for="exampleInputPassword1">Movie Release Date *:</label>
                                                 <input type="date" name="release_date" class="form-control"
-                                                    id="exampleInputPassword1" placeholder="Email"
+                                                    id="exampleInputPassword1" placeholder="Email" required
                                                     value="{{ old('release_date', $movie->release_date) }}">
                                             </div>
 
@@ -155,7 +155,7 @@
 
                                         <div class="col-xl-3">
                                             <div class="form-group">
-                                                <label for="exampleInputPassword1">Ticket Price (Without tax) *:</label>
+                                                <label for="exampleInputPassword1">Price (Without tax) *:</label>
                                                 <input type="number" name="price" class="form-control"
                                                     id="exampleInputPassword1" placeholder="Ticket Price"
                                                     value="{{ old('price', $movie->price) }}" required>
@@ -213,11 +213,12 @@
                                     <th>Tag</th>
                                     <th>Duration</th>
                                     <th>Release Date</th>
-                                    <th>Cast</th>
+                                    {{-- <th>Cast</th> --}}
                                     <th>Director</th>
                                     <th>Price</th>
-                                    <th>Tax</th>
+                                    {{-- <th>Tax</th> --}}
                                     <th>Action</th>
+                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -242,10 +243,10 @@
                                         </td>
                                         <td> {{ $movie->duration }} Hour </td>
                                         <td> {{ $movie->release_date }} </td>
-                                        <td> {{ $movie->cast }} </td>
+                                        {{-- <td> {{ $movie->cast }} </td> --}}
                                         <td> {{ $movie->director }} </td>
                                         <td> {{ $movie->price }} </td>
-                                        <td>
+                                        {{-- <td>
                                             @foreach ($movie->movie_has_tax as $tax)
                                                 {{ $tax->tax->tax }} ({{ $tax->tax->percentage }}%)
 
@@ -255,7 +256,7 @@
                                                     @endphp
                                                 @endif
                                             @endforeach
-                                        </td>
+                                        </td> --}}
                                         <td class="d-flex">
                                             <a href="{{ route('movie.shows', $movie) }}" class="btn btn-info">Show</a>
                                             <a href="{{ route('movie.edit', $movie) }}"
@@ -277,10 +278,10 @@
                                     <th>Tag</th>
                                     <th>Duration</th>
                                     <th>Release Date</th>
-                                    <th>Cast</th>
+                                    {{-- <th>Cast</th> --}}
                                     <th>Director</th>
                                     <th>Price</th>
-                                    <th>Tax</th>
+                                    {{-- <th>Tax</th> --}}
                                     <th>Action</th>
                                 </tr>
                             </tfoot>

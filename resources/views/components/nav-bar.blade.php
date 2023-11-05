@@ -35,7 +35,7 @@
             <a class="nav-link d-flex" data-toggle="dropdown" href="#">
                 <div class="circle">
                     @if (Auth()->user()->avatar)
-                        <img src="{{asset('storage')}}{{"/"}}{{Auth()->user()->avatar}}" alt="">
+                        <img src="{{ asset('storage') }}{{ '/' }}{{ Auth()->user()->avatar }}" alt="">
                     @else
                         @php
                             echo Str::substr(Auth()->user()->name, 0, 1);
@@ -47,17 +47,22 @@
             <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                 <div class="dropdown-divider"></div>
                 <a href="{{ route('profile') }}" class="dropdown-item">
-                    <i class="fas fa-envelope mr-2"></i> Profile
+                    <i class="fas fa-user mr-2"></i> Profile
                 </a>
                 <div class="dropdown-divider"></div>
                 <a href="{{ route('setting.org') }}" class="dropdown-item">
-                    <i class="fas fa-users mr-2"></i> Settings
+                    <i class="fas fa-user-cog mr-2"></i> Settings
                 </a>
                 <div class="dropdown-divider"></div>
                 <div class="dropdown-divider"></div>
-                <a href="#" class="dropdown-item">
-                    <i class="fas fa-file mr-2"></i> Logout
+                <a class="dropdown-item" href="{{ route('logout') }}"
+                    onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                    <i class="fas fa-sign-out-alt mr-2"></i> &nbsp; {{ __('Logout') }}
                 </a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                    @csrf
+                </form>
             </div>
         </li>
         <li class="nav-item">

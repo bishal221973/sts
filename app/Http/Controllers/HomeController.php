@@ -5,10 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\Book;
 use App\Models\BookedSeat;
 use App\Models\Movie;
+use App\Models\MovieShow;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
+use Spatie\Permission\Commands\Show;
 
 class HomeController extends Controller
 {
@@ -40,7 +42,8 @@ class HomeController extends Controller
         $totalMovie=Movie::count();
         $bookedSet=BookedSeat::count();
         $user=User::count();
-        return view('home',compact('movies','counts','totalMovie','bookedSet','user'));
+        $totalShows=MovieShow::count();
+        return view('home',compact('movies','counts','totalMovie','bookedSet','totalShows','user'));
     }
 
     public function profile()

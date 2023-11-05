@@ -15,6 +15,10 @@ use Illuminate\Support\Facades\Storage;
 
 class MovieController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index(Movie $movie)
     {
         $languages = Language::latest()->get();
@@ -33,11 +37,11 @@ class MovieController extends Controller
             'type_id' => 'required',
             'duration' => 'required',
             'release_date' => 'required',
-            'cast' => 'required',
-            'director' => 'required',
+            'cast' => 'nullable',
+            'director' => 'nullable',
             'price' => 'required',
             'trailer' => 'required',
-            'thumbnail' => 'required',
+            'thumbnail' => 'nullable',
         ]);
 
         if ($request->hasFile('thumbnail')) {

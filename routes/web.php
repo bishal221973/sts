@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\BookingController;
+use App\Http\Controllers\SettingController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -41,3 +43,5 @@ Route::get('booked/{id}',[BookingController::class,'booked'])->name('booked');
 Route::resource('users', App\Http\Controllers\UserController::class);
 Route::get('booked-seat-list/{id}',[BookingController::class,'bookedSeat'])->name('bookedSeat');
 Route::get('report',[BookingController::class,'report'])->name('report');
+Route::post('org-setting',[SettingController::class,'org'])->name('org');
+Route::post('change-password/{user}',[UserController::class,'changePassword'])->name('changePassword');
