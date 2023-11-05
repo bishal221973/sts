@@ -75,7 +75,8 @@
                 <div class="wrapper">
 
                     <div class="heading">
-                        <h2>Welcome!</h2>
+                        <h5>Welcome To STS Cinema</h5>
+                        <h3 class="font-weight-bold"> E-Ticketing System</h3>
                         <p>Sign In to your account</p>
                     </div>
 

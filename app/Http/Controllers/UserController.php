@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Movie;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -9,10 +10,7 @@ use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+
     public function index(User $user)
     {
         $users = User::latest()->get();
@@ -92,5 +90,17 @@ class UserController extends Controller
         } else {
             return redirect()->back()->with('error', 'Current password is incorrect');
         }
+    }
+
+    public function movieGet(){
+        $movieLists = Movie::with('type', 'language', 'movie_has_tag.tag', 'movie_has_tax.tax', 'movieShow')
+        ->latest()
+        ->paginate(10);
+
+        return response()->json($movieLists);
+    }
+
+    public function movieSearch(Request $request){
+        return $request;
     }
 }

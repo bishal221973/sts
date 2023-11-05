@@ -46,3 +46,4 @@ Route::get('booked-seat-list/{id}',[BookingController::class,'bookedSeat'])->nam
 Route::get('report',[BookingController::class,'report'])->name('report');
 Route::post('org-setting',[SettingController::class,'org'])->name('org');
 Route::post('change-password/{user}',[UserController::class,'changePassword'])->name('changePassword');
+

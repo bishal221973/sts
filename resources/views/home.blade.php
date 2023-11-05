@@ -83,18 +83,25 @@
 
                 </div>
             </div>
+            <hr>
+            <div class="col-12 d-flex justify-content-center">
+                <div class="col-lg-6">
+                    <input type="text" id="movieSearch" class="col-12 form-control mb-3 searchInput" placeholder="Search for movies">
+                </div>
+            </div>
             <div class="row">
-                @foreach ($counts as $key => $item)
+                @foreach ($movieLists as $item)
                     @php
-                        $movie = \App\Models\Movie::where('id', $item->movie_id)->first();
+                        $movie = \App\Models\Movie::where('id', $item->id)->first();
                     @endphp
-                    <div class="mx-2 zoom">
+                    <div class="mx-2 zoom mb-3" data-movie-title="{{ strtolower($movie->movie_name) }}" data-page="{{ $movieLists->currentPage() }}">
                         <div class="movieThumbnail"
                             style="background-image: url({{ asset('storage') }}{{ '/' }}{{ $movie->thumbnail }})">
 
                         </div>
                         <div class="movieDetail col-12">
-                            <h3 class="m-0 p-0 col-12 text-center text-white font-weight-bold">{{ $movie->movie_name }}</h3>
+                            <h3 class="m-0 p-0 col-12 text-center text-white font-weight-bold">{{ $movie->movie_name }}
+                            </h3>
                             <label
                                 class="col-12 text-center text-white font-weight-normal">({{ $movie->movie_name }})</label>
 
@@ -102,18 +109,50 @@
                                 <a href="{{ route('movieDetail', $movie->id) }}" class="col-12 text-center">Book Now</a>
                             </div>
                         </div>
-                        <a href="{{ route('bookedSeat', $item->movie_id) }}" class="movieSeatCount">
-                            {{ $item->seat_count }} Seat booked
-                        </a>
-                        {{-- <img src="{{ asset('storage') }}{{ '/' }}{{ $movie->thumbnail }}" height="300px"
-                            width="250px" alt="" style=""> --}}
+
                     </div>
                 @endforeach
+
+
+
+                <div class="col-12 d-flex justify-content-center">
+                    <div class="d-block">
+                       <label class="col-12 text-center"> Displaying 1-10 on page {{$movieLists->currentPage()}}/{{$movieLists->lastPage()}}</label>
+                        <div class="table-container" style="--data-limit: 9">
+
+                            <div class="pagination-container">
+                                <div class="d-flex row flex-fill align-items-end justify-content-center">
+                                    <span class="pagination-info"></span>
+                                    <a href="{{$movieLists->url(1)}}" class="btn">
+                                        <i class="fas fa-angle-double-left"></i>
+                                    </a>
+                                    <a href="{{$movieLists->previousPageUrl()}}" class="btn">
+                                        <i class="fas fa-angle-left"></i>
+                                    </a>
+                                    <div style="position: relative;top: -8px" class="px-5">
+                                        {{-- <div class="pagination-wrapper"> --}}
+                                            {{$movieLists->currentPage()}}
+                                        {{-- </div> --}}
+                                    </div>
+                                    <a href="{{$movieLists->nextPageUrl()}}" class="btn">
+                                        <i class="fas fa-angle-right"></i>
+                                    </a>
+                                    <a href="{{$movieLists->url($movieLists->lastPage())}}" class="btn">
+                                        <i class="fas fa-angle-double-right"></i>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="progress-bar">
+                                <div class="progress-point"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="container-fluid mt-3">
+            {{-- <div class="container-fluid mt-3">
                 <div class="card">
 
-                    <!-- /.card-header -->
                     <div class="card-body">
                         <table id="button" class="table table-bordered table-striped table-hover">
                             <thead>
@@ -193,9 +232,8 @@
                             </tfoot>
                         </table>
                     </div>
-                    <!-- /.card-body -->
                 </div>
-            </div><!-- /.container-fluid -->
+            </div> --}}
         </div>
     </div>
 @endsection

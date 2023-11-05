@@ -147,26 +147,51 @@
     }
 
     .movieThumbnail {
-        height: 300px;
-        width: 250px;
+        height: 350px;
+        width: 16vw;
         background-position: center;
         background-size: cover;
         transition: 1s;
     }
 
+    @media screen and (max-width: 1850px) {
+        .movieThumbnail {
+            height: 350px;
+            width: 16vw;
+        }
+    }
+    @media screen and (max-width: 1654px) {
+        .movieThumbnail {
+            height: 350px;
+            width: 15vw;
+        }
+    }
+    @media screen and (max-width: 1560px) {
+        .movieThumbnail {
+            height: 350px;
+            width: 19vw;
+        }
+    }
+
+    @media screen and (max-width: 1312px) {
+        .movieThumbnail {
+            height: 350px;
+            width: 18vw;
+        }
+    }
     .zoom:hover .movieThumbnail {
         transform: scale(1.1);
     }
 
     .movieDetail {
         position: absolute;
-        bottom: -150px;
-        background-color: rgba(0, 0, 0, 0.5);
-        transition: 1s;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.6);
+        /* transition: 1s; */
     }
 
     .zoom:hover .movieDetail {
-        bottom: 0;
+        /* bottom: 0; */
     }
 
     .movieSeatCount {
@@ -208,7 +233,7 @@
         background-color: #31285C;
     }
 
-    .login-container{
+    .login-container {
         padding-top: 10%;
         /* padding: 0;
         margin: 0; */
@@ -326,5 +351,7 @@
         font-weight: 900;
         color: #ffffff;
     }
-
+    .searchInput{
+        height: 50px;
+    }
 </style>

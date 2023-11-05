@@ -38,7 +38,7 @@
              "responsive": true,
              "lengthChange": false,
              "autoWidth": false,
-             "buttons": ["copy", "csv", "excel",  "print"]
+             "buttons": ["copy", "csv", "excel", "print"]
          }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
          $('#example2').DataTable({
              "paging": true,
@@ -53,7 +53,7 @@
              "responsive": true,
              "lengthChange": false,
              "autoWidth": false,
-            //  "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+             //  "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
          }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
      });
  </script>
@@ -217,8 +217,8 @@
          var checkbox = $(this);
          var dates = $(this).attr('id');
          if (checkbox.is(":checked")) {
-            $(".checkButton1").removeClass('isChecked');
-            $("."+dates).addClass('isChecked');
+             $(".checkButton1").removeClass('isChecked');
+             $("." + dates).addClass('isChecked');
              $(".checkButton").prop("checked", false);
              $(this).prop("checked", true);
          } else {
@@ -231,7 +231,7 @@
          var checkbox = $(this);
          var name = $(this).attr('id');
          if (checkbox.is(":checked")) {
-            $("."+name).addClass('isChecked');
+             $("." + name).addClass('isChecked');
              $(".checkButton").prop("checked", false);
              $(this).prop("checked", true);
          } else {
@@ -240,23 +240,55 @@
      });
  </script>
 
-<script>
-    const fileInput = document.getElementById('fileInput');
-    const imagePreview = document.getElementById('imagePreview');
+ <script>
+     const fileInput = document.getElementById('fileInput');
+     const imagePreview = document.getElementById('imagePreview');
 
-    fileInput.addEventListener('change', function() {
-        const file = fileInput.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = function(event) {
-                imagePreview.style.display = 'block';
-                imagePreview.style.backgroundImage = `url('${event.target.result}')`;
-                document.getElementById('NoImg').style.display="none";
-            };
-            reader.readAsDataURL(file);
-        } else {
-            imagePreview.style.display = 'none';
-            imagePreview.style.backgroundImage = 'none';
-        }
-    });
-</script>
+     fileInput.addEventListener('change', function() {
+         const file = fileInput.files[0];
+         if (file) {
+             const reader = new FileReader();
+             reader.onload = function(event) {
+                 imagePreview.style.display = 'block';
+                 imagePreview.style.backgroundImage = `url('${event.target.result}')`;
+                 document.getElementById('NoImg').style.display = "none";
+             };
+             reader.readAsDataURL(file);
+         } else {
+             imagePreview.style.display = 'none';
+             imagePreview.style.backgroundImage = 'none';
+         }
+     });
+ </script>
+
+ <script>
+     const movieSearchInput = document.getElementById('movieSearch');
+     const movieContainers = document.querySelectorAll('.zoom'); // Assuming the movie containers have the "zoom" class
+
+     movieSearchInput.addEventListener('input', function() {
+         const searchQuery = movieSearchInput.value.trim().toLowerCase();
+
+         movieContainers.forEach(container => {
+             const movieTitle = container.getAttribute('data-movie-title').toLowerCase();
+
+             // Check if the movie title matches the search query
+             if (movieTitle.includes(searchQuery)) {
+                 container.style.display = 'block';
+             } else {
+                 container.style.display = 'none';
+             }
+         });
+     });
+
+     // The code below will ensure that the search works correctly across all pages
+
+     // Listen for changes in the URL (e.g., when the user navigates to a different page)
+     window.addEventListener('popstate', function() {
+         const urlSearchParams = new URLSearchParams(window.location.search);
+         const page = urlSearchParams.get('page') || 1;
+
+         // Reapply the search filter when the URL changes
+         movieSearchInput.dispatchEvent(new Event('input'));
+     });
+ </script>
+

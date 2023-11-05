@@ -32,19 +32,27 @@ class HomeController extends Controller
     public function index()
     {
         $movies = Movie::with('type', 'language', 'movie_has_tag.tag', 'movie_has_tax.tax',"movieShow")->latest()->get();
+        $movieLists = Movie::with('type', 'language', 'movie_has_tag.tag', 'movie_has_tax.tax', 'movieShow')
+    ->latest()
+    ->paginate(10);
 
-         $counts = DB::table('booked_seats')
-        ->select('movie_id', DB::raw('count(*) as seat_count'))
-        ->groupBy('movie_id')
-        ->orderBy('seat_count', 'desc')
-        ->limit(3)
-        ->get();
+// Get and return the current page number of the paginated results.
+// return $currentPage = $movieLists->items();
+
+// return $movieLists;
+
+        //  $counts = DB::table('booked_seats')
+        // ->select('movie_id', DB::raw('count(*) as seat_count'))
+        // ->groupBy('movie_id')
+        // ->orderBy('seat_count', 'desc')
+        // ->limit(3)
+        // ->get();
     // ->orderBy('count', 'desc')
         $totalMovie=Movie::count();
         $bookedSet=BookedSeat::count();
         $user=User::count();
         $totalShows=MovieShow::count();
-        return view('home',compact('movies','counts','totalMovie','bookedSet','totalShows','user'));
+        return view('home',compact('movies','movieLists','totalMovie','bookedSet','totalShows','user'));
     }
 
     public function profile()
