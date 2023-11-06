@@ -19,19 +19,19 @@ class TagController extends Controller
 
     public function store(Request $request){
         $data=$request->validate([
-            "tag"=> "required",
+            "tag"=> "required|unique:tags,tag",
         ]);
 
         $data["slug"]=Str::slug($request->tag);
 
         Tag::create($data);
 
-        return redirect()->back()->with("success","New tag saved.");
+        return redirect()->back()->with("success","New movie tag saved successfully.");
     }
 
     public function show(Tag $tag){
         $tag->delete();
-        return redirect()->back()->with("success","Selected tag removed.");
+        return redirect()->back()->with("success","Selected movie tag removed successfully.");
     }
 
     public function edit(Tag $tag){
@@ -41,13 +41,13 @@ class TagController extends Controller
 
     public function update(Request $request, Tag $tag){
         $data=$request->validate([
-            "tag"=> "required",
+            "tag"=> "required|unique:tags,tag,".$tag->id,
         ]);
 
         $data["slug"]=Str::slug($request->tag);
 
         $tag->update($data);
 
-        return redirect()->route('tag.index')->with("success","Selected tag update.");
+        return redirect()->route('tag.index')->with("success","Selected tag update successfully.");
     }
 }

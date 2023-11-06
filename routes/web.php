@@ -47,3 +47,23 @@ Route::get('report',[BookingController::class,'report'])->name('report');
 Route::post('org-setting',[SettingController::class,'org'])->name('org');
 Route::post('change-password/{user}',[UserController::class,'changePassword'])->name('changePassword');
 
+
+
+Route::get('/foo', function () {
+    Artisan::call('storage:link');
+});
+
+
+
+Route::get('/migrate',function(){
+    $exitCode=Artisan::call('migrate');
+});
+
+Route::get('/migrate-refresh',function(){
+    $exitCode=Artisan::call('migrate:refresh');
+});
+
+Route::get('/seed',function(){
+    $exitCode=Artisan::call('db:seed');
+    return $exitCode;
+});

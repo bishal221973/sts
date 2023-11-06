@@ -25,6 +25,31 @@
             @endpush
         @endisset
 
+        @if ($errors->any())
+            @push('script')
+                <script>
+                    $("#modal-default").modal('show');
+                </script>
+            @endpush
+        @endif
+        @if (session()->has('success'))
+            @push('toast')
+                <script>
+                    var Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timer: 3000
+                    });
+
+                    Toast.fire({
+                        icon: 'success',
+                        title: '{{ session()->get('success') }}'
+                    })
+                </script>
+            @endpush
+        @endif
+
 
         <section class="content">
             <div class="container-fluid">
@@ -61,6 +86,10 @@
                                                         <input type="text" name="name" class="form-control"
                                                             id="exampleInputPassword1" placeholder="Name"
                                                             value="{{ old('name', $user->name) }}" required>
+                                                        @error('name')
+                                                            <small
+                                                                class="font-weight-normal text-danger">{{ $message }}</small>
+                                                        @enderror
                                                     </div>
 
                                                     <div class="form-group">
@@ -68,6 +97,10 @@
                                                         <input type="text" name="email" class="form-control"
                                                             id="exampleInputPassword1" placeholder="Email"
                                                             value="{{ old('email', $user->email) }}" required>
+                                                            @error('email')
+                                                            <small
+                                                                class="font-weight-normal text-danger">{{ $message }}</small>
+                                                        @enderror
                                                     </div>
                                                     @if (!$user->id)
                                                         <div class="form-group">
@@ -75,12 +108,18 @@
                                                             <input type="text" name="password" class="form-control"
                                                                 id="exampleInputPassword1" placeholder="Password"
                                                                 value="{{ old('password', $user->password) }}" required>
+
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="exampleInputPassword1">Confirm Password *:</label>
-                                                            <input type="text" name="" class="form-control"
-                                                                id="exampleInputPassword1" placeholder="Confirm Password"
+                                                            <input type="text" name="password_confirmation"
+                                                                class="form-control" id="exampleInputPassword1"
+                                                                placeholder="Confirm Password"
                                                                 value="{{ old('password', $user->password) }}" required>
+                                                                @error('password')
+                                                            <small
+                                                                class="font-weight-normal text-danger">{{ $message }}</small>
+                                                        @enderror
                                                         </div>
                                                     @endif
                                                     <div class="row">
@@ -90,13 +129,21 @@
                                                                 <option value="Male">Male</option>
                                                                 <option value="Female">Female</option>
                                                             </select>
+                                                            @error('gender')
+                                                            <small
+                                                                class="font-weight-normal text-danger">{{ $message }}</small>
+                                                        @enderror
                                                         </div>
 
                                                         <div class="form-group col">
                                                             <label for="exampleInputPassword1">Contact *:</label>
-                                                            <input type="text" name="contact" class="form-control"
+                                                            <input type="number" name="contact" class="form-control"
                                                                 id="exampleInputPassword1" placeholder="Contact"
                                                                 value="{{ old('contact', $user->contact) }}" required>
+                                                                @error('contact')
+                                                            <small
+                                                                class="font-weight-normal text-danger">{{ $message }}</small>
+                                                        @enderror
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
@@ -150,7 +197,7 @@
                                                                 class="btn btn-danger ml-2">Delete</button>
                                                         </form>
                                                     </td>
-                                                    @else
+                                                @else
                                                     <td>
                                                         Not Allowed
                                                     </td>

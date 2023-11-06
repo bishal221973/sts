@@ -19,19 +19,19 @@ class TypeController extends Controller
 
     public function store(Request $request){
         $data=$request->validate([
-            "type"=> "required",
+            "type"=> "required|unique:types,type",
         ]);
 
         $data["slug"]=Str::slug($request->type);
 
         Type::create($data);
 
-        return redirect()->back()->with("success","New Type saved.");
+        return redirect()->back()->with("success","New movie type saved successfully.");
     }
 
     public function show(Type $type){
         $type->delete();
-        return redirect()->back()->with("success","Selected type removed.");
+        return redirect()->back()->with("success","Selected movie type removed successfully.");
     }
 
     public function edit(Type $type){
@@ -41,13 +41,13 @@ class TypeController extends Controller
 
     public function update(Request $request, Type $type){
         $data=$request->validate([
-            "type"=> "required",
+            "type"=> "required|unique:types,type,".$type->id,
         ]);
 
         $data["slug"]=Str::slug($request->type);
 
         $type->update($data);
 
-        return redirect()->route('type.index')->with("success","Selected type update.");
+        return redirect()->route('type.index')->with("success","Selected movie type update successfully.");
     }
 }

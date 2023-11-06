@@ -21,10 +21,10 @@ class UserController extends Controller
     {
         $data = $request->validate([
             "name" => 'required',
-            "email" => 'required',
+            "email" => 'required|unique:users,email',
             "gender" => 'nullable',
             "contact" => 'nullable',
-            "password" => 'required',
+            "password" => 'required|confirmed',
         ]);
 
         if ($request->hasFile($request->avatar)) {
@@ -33,7 +33,7 @@ class UserController extends Controller
         $user = User::create($data);
         $user->assignRole("admin");
 
-        return redirect()->back()->with("success", "New record saved.");
+        return redirect()->back()->with("success", "New user saved successfully.");
     }
 
     public function edit(User $user)
@@ -46,7 +46,7 @@ class UserController extends Controller
     {
         $data = $request->validate([
             "name" => 'required',
-            "email" => 'required',
+            "email" => 'required|unique:users,email,'.$user->id,
             "gender" => 'nullable',
             "contact" => 'nullable',
         ]);
@@ -59,7 +59,7 @@ class UserController extends Controller
         }
         $user->update($data);
 
-        return redirect()->route('users.index')->with("success", "Selected record updated.");
+        return redirect()->route('users.index')->with("success", "Selected user updated successfully.");
     }
 
     public function show(User $user){
@@ -68,7 +68,7 @@ class UserController extends Controller
         }
         $user->delete();
 
-        return redirect()->back()->with("success","Selected usere removed.");
+        return redirect()->back()->with("success","Selected usere removed successfully.");
     }
 
     public function changePassword(Request $request,User $user){

@@ -11,6 +11,7 @@ class TaxController extends Controller
     {
         $this->middleware('auth');
     }
+
     public function index(Tax $tax){
         $taxs=Tax::latest()->get();
         return view('tax.index',compact('tax','taxs'));
@@ -24,12 +25,12 @@ class TaxController extends Controller
 
         Tax::create($data);
 
-        return redirect()->back()->with('success','New tax store successfully.');
+        return redirect()->back()->with('success','New movie tax save successfully.');
     }
 
     public function show(Tax $tax){
         $tax->delete();
-        return redirect()->back()->with('success','Selected tax removed.');
+        return redirect()->back()->with('success','Selected movie tax removed successfully.');
     }
 
     public function edit(Tax $tax){

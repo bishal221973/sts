@@ -83,10 +83,13 @@
 
                 </div>
             </div>
+
+
             <hr>
             <div class="col-12 d-flex justify-content-center">
                 <div class="col-lg-6">
-                    <input type="text" id="movieSearch" class="col-12 form-control mb-3 searchInput" placeholder="Search for movies">
+                    <input type="text" id="movieSearch" class="col-12 form-control mb-3 searchInput"
+                        placeholder="Search for movies">
                 </div>
             </div>
             <div class="row">
@@ -94,7 +97,8 @@
                     @php
                         $movie = \App\Models\Movie::where('id', $item->id)->first();
                     @endphp
-                    <div class="mx-2 zoom mb-3" data-movie-title="{{ strtolower($movie->movie_name) }}" data-page="{{ $movieLists->currentPage() }}">
+                    <div class="mx-2 zoom mb-3" data-movie-title="{{ strtolower($movie->movie_name) }}"
+                        data-page="{{ $movieLists->currentPage() }}">
                         <div class="movieThumbnail"
                             style="background-image: url({{ asset('storage') }}{{ '/' }}{{ $movie->thumbnail }})">
 
@@ -117,27 +121,28 @@
 
                 <div class="col-12 d-flex justify-content-center">
                     <div class="d-block">
-                       <label class="col-12 text-center"> Displaying 1-10 on page {{$movieLists->currentPage()}}/{{$movieLists->lastPage()}}</label>
+                        <label class="col-12 text-center"> Displaying 1-10 on page
+                            {{ $movieLists->currentPage() }}/{{ $movieLists->lastPage() }}</label>
                         <div class="table-container" style="--data-limit: 9">
 
                             <div class="pagination-container">
                                 <div class="d-flex row flex-fill align-items-end justify-content-center">
                                     <span class="pagination-info"></span>
-                                    <a href="{{$movieLists->url(1)}}" class="btn">
+                                    <a href="{{ $movieLists->url(1) }}" class="btn">
                                         <i class="fas fa-angle-double-left"></i>
                                     </a>
-                                    <a href="{{$movieLists->previousPageUrl()}}" class="btn">
+                                    <a href="{{ $movieLists->previousPageUrl() }}" class="btn">
                                         <i class="fas fa-angle-left"></i>
                                     </a>
                                     <div style="position: relative;top: -8px" class="px-5">
                                         {{-- <div class="pagination-wrapper"> --}}
-                                            {{$movieLists->currentPage()}}
+                                        {{ $movieLists->currentPage() }}
                                         {{-- </div> --}}
                                     </div>
-                                    <a href="{{$movieLists->nextPageUrl()}}" class="btn">
+                                    <a href="{{ $movieLists->nextPageUrl() }}" class="btn">
                                         <i class="fas fa-angle-right"></i>
                                     </a>
-                                    <a href="{{$movieLists->url($movieLists->lastPage())}}" class="btn">
+                                    <a href="{{ $movieLists->url($movieLists->lastPage()) }}" class="btn">
                                         <i class="fas fa-angle-double-right"></i>
                                     </a>
                                 </div>

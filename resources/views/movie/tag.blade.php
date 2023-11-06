@@ -25,6 +25,32 @@
             @endpush
         @endisset
 
+        @if ($errors->any())
+            @push('script')
+                <script>
+                    $("#modal-default").modal('show');
+                </script>
+            @endpush
+        @endif
+
+        @if (session()->has('success'))
+            @push('toast')
+                <script>
+                    var Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timer: 3000
+                    });
+
+                    Toast.fire({
+                        icon: 'success',
+                        title: '{{ session()->get('success') }}'
+                    })
+                </script>
+            @endpush
+        @endif
+
 
         <section class="content">
             <div class="container-fluid">
@@ -49,7 +75,9 @@
                                                 </button>
                                             </div>
                                             <div class="modal-body">
-                                                <form action="{{ $tag->id ? route('tag.update',$tag) : route('tag.store') }}" method="POST">
+                                                <form
+                                                    action="{{ $tag->id ? route('tag.update', $tag) : route('tag.store') }}"
+                                                    method="POST">
                                                     @csrf
                                                     @isset($tag->id)
                                                         @method('PUT')
@@ -58,10 +86,15 @@
                                                         <label for="exampleInputPassword1">Tag *:</label>
                                                         <input type="text" name="tag" class="form-control"
                                                             id="exampleInputPassword1" placeholder="Tag"
-                                                            value="{{ old('tag',$tag->tag) }}" required>
+                                                            value="{{ old('tag', $tag->tag) }}" required>
+
+                                                        @error('tag')
+                                                            <small class="font-weight-normal text-danger">{{$message}}</small>
+                                                        @enderror
                                                     </div>
                                                     <div class="card-footer">
-                                                        <button type="submit" class="btn btn-primary">{{$tag->id ? 'Update' : 'Save'}}</button>
+                                                        <button type="submit"
+                                                            class="btn btn-primary">{{ $tag->id ? 'Update' : 'Save' }}</button>
                                                     </div>
                                                 </form>
                                             </div>
@@ -90,8 +123,7 @@
                                                 <td>{{ $tag->tag }}</td>
                                                 <td>{{ $tag->slug }}</td>
                                                 <td class="d-flex">
-                                                    <a href="{{ route('tag.edit', $tag) }}"
-                                                        class="btn btn-warning">Edit</a>
+                                                    <a href="{{ route('tag.edit', $tag) }}" class="btn btn-warning">Edit</a>
 
                                                     <form action="{{ route('tag.destroy', $tag) }}"
                                                         onsubmit="return confirm('Are you sure ?')" method="DELETE">

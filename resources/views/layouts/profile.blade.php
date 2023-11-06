@@ -18,6 +18,23 @@
                 </div>
             </div><!-- /.container-fluid -->
         </section>
+        @if (session()->has('success'))
+            @push('toast')
+                <script>
+                    var Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timer: 3000
+                    });
+
+                    Toast.fire({
+                        icon: 'success',
+                        title: '{{ session()->get('success') }}'
+                    })
+                </script>
+            @endpush
+        @endif
 
         <!-- Main content -->
         <section class="content">

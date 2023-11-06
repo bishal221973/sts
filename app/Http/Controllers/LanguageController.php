@@ -18,19 +18,19 @@ class LanguageController extends Controller
 
     public function store(Request $request){
         $data=$request->validate([
-            "language"=> "required",
+            "language"=> "required|unique:languages,language",
         ]);
 
         $data["slug"]=Str::slug($request->language);
 
         Language::create($data);
 
-        return redirect()->back()->with("success","New Language saved.");
+        return redirect()->back()->with("success","New movie language saved  successfully.");
     }
 
     public function show(Language $language){
         $language->delete();
-        return redirect()->back()->with("success","Selected language removed.");
+        return redirect()->back()->with("success","Selected movie language removed successfully.");
     }
 
     public function edit(Language $language){
@@ -40,13 +40,13 @@ class LanguageController extends Controller
 
     public function update(Request $request, Language $language){
         $data=$request->validate([
-            "language"=> "required",
+            "language"=> "required|unique:languages,language,".$language->id,
         ]);
 
         $data["slug"]=Str::slug($request->language);
 
         $language->update($data);
 
-        return redirect()->route('language.index')->with("success","Selected language update.");
+        return redirect()->route('language.index')->with("success","Selected movie language update successfully.");
     }
 }

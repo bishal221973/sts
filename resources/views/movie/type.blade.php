@@ -24,7 +24,30 @@
                 </script>
             @endpush
         @endisset
+        @if ($errors->any())
+            @push('script')
+                <script>
+                    $("#modal-default").modal('show');
+                </script>
+            @endpush
+        @endif
+        @if (session()->has('success'))
+            @push('toast')
+                <script>
+                    var Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timer: 3000
+                    });
 
+                    Toast.fire({
+                        icon: 'success',
+                        title: '{{ session()->get('success') }}'
+                    })
+                </script>
+            @endpush
+        @endif
 
         <section class="content">
             <div class="container-fluid">
@@ -49,7 +72,9 @@
                                                 </button>
                                             </div>
                                             <div class="modal-body">
-                                                <form action="{{ $type->id ? route('type.update',$type) : route('type.store') }}" method="POST">
+                                                <form
+                                                    action="{{ $type->id ? route('type.update', $type) : route('type.store') }}"
+                                                    method="POST">
                                                     @csrf
                                                     @isset($type->id)
                                                         @method('PUT')
@@ -58,10 +83,15 @@
                                                         <label for="exampleInputPassword1">Type *:</label>
                                                         <input type="text" name="type" class="form-control"
                                                             id="exampleInputPassword1" placeholder="Type"
-                                                            value="{{ old('type',$type->type) }}" required>
+                                                            value="{{ old('type', $type->type) }}" required>
+                                                        @error('type')
+                                                            <small
+                                                                class="font-weight-normal text-danger">{{ $message }}</small>
+                                                        @enderror
                                                     </div>
                                                     <div class="card-footer">
-                                                        <button type="submit" class="btn btn-primary">{{$type->id ? 'Update' : 'Save'}}</button>
+                                                        <button type="submit"
+                                                            class="btn btn-primary">{{ $type->id ? 'Update' : 'Save' }}</button>
                                                     </div>
                                                 </form>
                                             </div>

@@ -40,7 +40,7 @@ class MovieController extends Controller
             'cast' => 'nullable',
             'director' => 'nullable',
             'price' => 'required',
-            'trailer' => 'required',
+            'trailer' => 'nullable',
             'thumbnail' => 'nullable',
         ]);
 

@@ -24,6 +24,30 @@
                 </script>
             @endpush
         @endisset
+        @if ($errors->any())
+            @push('script')
+                <script>
+                    $("#modal-default").modal('show');
+                </script>
+            @endpush
+        @endif
+        @if (session()->has('success'))
+            @push('toast')
+                <script>
+                    var Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timer: 3000
+                    });
+
+                    Toast.fire({
+                        icon: 'success',
+                        title: '{{ session()->get('success') }}'
+                    })
+                </script>
+            @endpush
+        @endif
 
 
         <section class="content">
@@ -49,7 +73,9 @@
                                                 </button>
                                             </div>
                                             <div class="modal-body">
-                                                <form action="{{ $language->id ? route('language.update',$language) : route('language.store') }}" method="POST">
+                                                <form
+                                                    action="{{ $language->id ? route('language.update', $language) : route('language.store') }}"
+                                                    method="POST">
                                                     @csrf
                                                     @isset($language->id)
                                                         @method('PUT')
@@ -58,10 +84,15 @@
                                                         <label for="exampleInputPassword1">Language *:</label>
                                                         <input type="text" name="language" class="form-control"
                                                             id="exampleInputPassword1" placeholder="Language"
-                                                            value="{{ old('language',$language->language) }}" required>
+                                                            value="{{ old('language', $language->language) }}" required>
+                                                        @error('language')
+                                                            <small
+                                                                class="font-weight-normal text-danger">{{ $message }}</small>
+                                                        @enderror
                                                     </div>
                                                     <div class="card-footer">
-                                                        <button type="submit" class="btn btn-primary">{{$language->id ? 'Update' : 'Save'}}</button>
+                                                        <button type="submit"
+                                                            class="btn btn-primary">{{ $language->id ? 'Update' : 'Save' }}</button>
                                                     </div>
                                                 </form>
                                             </div>

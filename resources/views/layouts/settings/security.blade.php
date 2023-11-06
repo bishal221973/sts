@@ -17,6 +17,23 @@
         </ul>
 
     </div>
+    @if (session()->has('success'))
+        @push('toast')
+            <script>
+                var Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 3000
+                });
+
+                Toast.fire({
+                    icon: 'success',
+                    title: '{{ session()->get('success') }}'
+                })
+            </script>
+        @endpush
+    @endif
     <label class="mt-3 font-weight-normal">If your password is used elsewhere then your account may be less secure. Protect
         yourself by choosing a strong password.</label>
     <hr class="col-12">
@@ -45,7 +62,7 @@
                         <input type="password" name="password_confirmation" class="form-control" id="exampleInputPassword1"
                             placeholder="Confirm Password" required value="">
                     </div>
-                    @error("password")
+                    @error('password')
                         <small class="text-danger">{{ $message }}</small>
                     @enderror
                 </div>
