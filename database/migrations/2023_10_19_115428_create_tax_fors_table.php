@@ -11,17 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('movies', function (Blueprint $table) {
+        Schema::create('tax_fors', function (Blueprint $table) {
             $table->id();
-            $table->string('movie_name');
-            $table->unsignedBigInteger('language_id');
-            $table->foreign('language_id')->references('id')->on('languages')->onDelete('cascade');
+            $table->unsignedBigInteger('taxe_id');
+            $table->foreign('taxe_id')->references('id')->on('taxes')->onDelete('cascade');
             $table->unsignedBigInteger('type_id');
             $table->foreign('type_id')->references('id')->on('types')->onDelete('cascade');
-            $table->string('duration')->nullable();
-            $table->string('release_date')->nullable();
-            $table->string('trailer')->nullable();
-            $table->string('thumbnail')->nullable();
             $table->timestamps();
         });
     }
@@ -31,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('movies');
+        Schema::dropIfExists('tax_fors');
     }
 };

@@ -37,9 +37,6 @@ class MovieController extends Controller
             'type_id' => 'required',
             'duration' => 'required',
             'release_date' => 'required',
-            'cast' => 'nullable',
-            'director' => 'nullable',
-            'price' => 'required',
             'trailer' => 'nullable',
             'thumbnail' => 'nullable',
         ]);
@@ -56,14 +53,6 @@ class MovieController extends Controller
                 'tag_id' => $tag,
             ]);
         }
-
-        foreach ($request->taxe_id as $tax) {
-            MovieHasTax::create([
-                'movie_id' => $movie->id,
-                'taxe_id' => $tax,
-            ]);
-        }
-
 
 
         return redirect()->back()->with('success', "New Movie Saved");
@@ -99,9 +88,6 @@ class MovieController extends Controller
             'type_id' => 'required',
             'duration' => 'required',
             'release_date' => 'required',
-            'cast' => 'required',
-            'director' => 'required',
-            'price' => 'required',
             'trailer' => 'required',
             'thumbnail' => 'nullable',
         ]);
@@ -122,13 +108,6 @@ class MovieController extends Controller
             MovieHasTag::create([
                 'movie_id' => $movie->id,
                 'tag_id' => $tag,
-            ]);
-        }
-
-        foreach ($request->taxe_id as $tax) {
-            MovieHasTax::create([
-                'movie_id' => $movie->id,
-                'taxe_id' => $tax,
             ]);
         }
 

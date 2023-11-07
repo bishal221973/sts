@@ -91,21 +91,6 @@
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
-                        <label for="exampleInputPassword1">Serial Number (Start From)</label>
-                        <input type="text" name="sn_number" class="form-control" id="exampleInputPassword1"
-                            placeholder="0001000" value="{{ settings()->get('sn_number', $default = null) }}">
-                    </div>
-                </div>
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <label for="exampleInputPassword1">Organization Address</label>
-                        <textarea name="org_address" class="form-control" id="" cols="30" rows="3"
-                            placeholder="Organization Address">{{ settings()->get('org_address', $default = null) }}</textarea>
-                    </div>
-                </div>
-
-                <div class="col-md-12">
-                    <div class="form-group">
                         <label for="exampleInputPassword1">Organization Logo</label>
                         <div class="input-group">
                             <div class="custom-file">
@@ -117,6 +102,16 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Organization Address</label>
+                        <textarea name="org_address" class="form-control" id="" cols="30" rows="3"
+                            placeholder="Organization Address">{{ settings()->get('org_address', $default = null) }}</textarea>
+                    </div>
+                </div>
+
+
             </div>
             <div class="card-footer">
                 <button type="submit" class="btn btn-primary">Save</button>

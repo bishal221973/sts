@@ -36,7 +36,7 @@
                                     <div style="width: 300px;position: relative;">
 
                                         <img src="{{ asset('storage') }}{{ '/' }}{{ $movie->thumbnail }}"
-                                            style="height: 300px;width:300px" alt="">
+                                            style="height: 300px;width:250px" alt="">
                                     </div>
                                     <div class="col px-5">
                                         <h3 class="font-weight-bold">{{ $movie->movie_name }}
@@ -53,10 +53,6 @@
                                             @endforeach
                                         </label>
                                         <br>
-                                        <br>
-                                        <label>Director : <span class="font-weight-normal">{{ $movie->director }}</span>
-                                        </label> <br>
-                                        <label>Cast : <span class="font-weight-normal">{{ $movie->cast }}</span> </label>
                                         <br>
                                         <label>Release On : <span
                                                 class="font-weight-normal">{{ $movie->release_date }}</span> </label> <br>

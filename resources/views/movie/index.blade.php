@@ -47,12 +47,12 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="row">
-                                <div style="width: 300px;position: relative;">
+                                <div style="width: 200px;position: relative;">
                                     <input type="file" name="thumbnail" id="fileInput" class="imgPicker">
                                     <div class="no-img" id="NoImg">
                                         <label class="text-muted">Image</label>
                                     </div>
-                                    <img id="imagePreview" style="width: 300px" alt="">
+                                    <img id="imagePreview" style="width: 200px" alt="">
                                 </div>
                                 <div class="col">
                                     <div class="row">
@@ -62,13 +62,16 @@
                                                 <input type="text" name="movie_name" class="form-control"
                                                     id="exampleInputPassword1" placeholder="Movie Name"
                                                     value="{{ old('movie_name', $movie->movie_name) }}" required>
+                                                @error('movie_name')
+                                                    <small class="font-weight-normal text-danger">{{ $message }}</small>
+                                                @enderror
                                             </div>
                                         </div>
                                         <div class="col-xl-4">
                                             <div class="form-group">
                                                 <label for="exampleInputPassword1">Movie Language *:</label>
-                                                <select class="form-control select2" name="language_id"
-                                                    style="width: 100%;" required>
+                                                <select class="form-control select2" name="language_id" style="width: 100%;"
+                                                    required>
                                                     <option value="">Please select a language</option>
                                                     @foreach ($languages as $language)
                                                         <option value="{{ $language->id }}"
@@ -77,13 +80,17 @@
                                                         </option>
                                                     @endforeach
                                                 </select>
+                                                @error('language_id')
+                                                    <small class="font-weight-normal text-danger">{{ $message }}</small>
+                                                @enderror
                                             </div>
 
                                         </div>
                                         <div class="col-xl-4">
                                             <div class="form-group">
                                                 <label for="exampleInputPassword1">Movie Type *:</label>
-                                                <select class="form-control select2" required name="type_id" style="width: 100%;">
+                                                <select class="form-control select2" required name="type_id"
+                                                    style="width: 100%;">
                                                     <option value="">Please select a movie type</option>
                                                     @foreach ($types as $type)
                                                         <option value="{{ $type->id }}"
@@ -91,6 +98,9 @@
                                                             {{ $type->type }}</option>
                                                     @endforeach
                                                 </select>
+                                                @error('type_id')
+                                                    <small class="font-weight-normal text-danger">{{ $message }}</small>
+                                                @enderror
                                             </div>
 
                                         </div>
@@ -100,12 +110,41 @@
                                                 <label for="exampleInputPassword1">Movie Tag *:</label>
                                                 <select class="form-control select2" multiple required name="tag_id[]"
                                                     style="width: 100%;">
+                                                    @php
+                                                        $i = 0;
+                                                        $j = $movie->movie_has_tag->count();
+
+                                                    @endphp
                                                     @foreach ($tags as $tag)
-                                                        <option value="{{ $tag->id }}"> {{ $tag->tag }} </option>
+                                                        @if ($movie->id || $i < $j - 1)
+                                                            @if ($j > 0)
+                                                                <option value="{{ $tag->id }}"
+                                                                    {{ $tag->id == $movie->movie_has_tag[$i]->tag_id ? 'selected' : '' }}>
+                                                                    {{ $tag->tag }}
+                                                                </option>
+
+                                                                @php
+                                                                    if ($tag->id == $movie->movie_has_tag[$i]->tag_id && $i < $j - 1) {
+                                                                        $i++;
+                                                                    }
+                                                                @endphp
+                                                            @else
+                                                                <option value="{{ $tag->id }}">
+                                                                    {{ $tag->tag }}
+                                                                </option>
+                                                            @endif
+                                                        @else
+                                                            <option value="{{ $tag->id }}">
+                                                                {{ $tag->tag }}
+                                                            </option>
+                                                        @endif
+                                                        {{-- <option value="{{ $tag->id }}"> {{ $tag->tag }} </option> --}}
                                                     @endforeach
                                                 </select>
+                                                @error('tag_id')
+                                                    <small class="font-weight-normal text-danger">{{ $message }}</small>
+                                                @enderror
                                             </div>
-
                                         </div>
                                         <div class="col-md-3">
                                             <div class="form-group">
@@ -113,6 +152,9 @@
                                                 <input type="text" name="trailer" class="form-control"
                                                     id="exampleInputPassword1" placeholder="Trailer URL (Youtube Only)"
                                                     value="{{ old('trailer', $movie->trailer) }}">
+                                                @error('trailer')
+                                                    <small class="font-weight-normal text-danger">{{ $message }}</small>
+                                                @enderror
                                             </div>
                                         </div>
                                         <div class="col-xl-3">
@@ -121,6 +163,9 @@
                                                 <input type="text" name="duration" class="form-control"
                                                     id="exampleInputPassword1" placeholder="2 Hour 30 Minute"
                                                     value="{{ old('duration', $movie->duration) }}" required>
+                                                @error('duration')
+                                                    <small class="font-weight-normal text-danger">{{ $message }}</small>
+                                                @enderror
                                             </div>
 
                                         </div>
@@ -130,64 +175,21 @@
                                                 <input type="date" name="release_date" class="form-control"
                                                     id="exampleInputPassword1" placeholder="Email" required
                                                     value="{{ old('release_date', $movie->release_date) }}">
-                                            </div>
-
-                                        </div>
-                                        <div class="col-xl-3">
-                                            <div class="form-group">
-                                                <label for="exampleInputPassword1">Cast</label>
-                                                <input type="text" name="cast" class="form-control"
-                                                    id="exampleInputPassword1" placeholder="Cast1, Cast2"
-                                                    value="{{ old('cast', $movie->cast) }}">
+                                                @error('release_date')
+                                                    <small class="font-weight-normal text-danger">{{ $message }}</small>
+                                                @enderror
                                             </div>
 
                                         </div>
 
-                                        <div class="col-xl-3">
-                                            <div class="form-group">
-                                                <label for="exampleInputPassword1">Director</label>
-                                                <input type="text" name="director" class="form-control"
-                                                    id="exampleInputPassword1" placeholder="Director"
-                                                    value="{{ old('director', $movie->director) }}">
-                                            </div>
 
-                                        </div>
 
-                                        <div class="col-xl-3">
-                                            <div class="form-group">
-                                                <label for="exampleInputPassword1">Price (Without tax) *:</label>
-                                                <input type="number" name="price" class="form-control"
-                                                    id="exampleInputPassword1" placeholder="Ticket Price"
-                                                    value="{{ old('price', $movie->price) }}" required>
-                                            </div>
 
-                                        </div>
-                                        <div class="col-xl-3">
-                                            <div class="form-group">
-                                                <label for="exampleInputPassword1">Tax *:</label>
-                                                <select class="form-control select2" required multiple style="width: 100%;"
-                                                    name="taxe_id[]">
-                                                    @foreach ($taxs as $tax)
-                                                        <option value="{{ $tax->id }}"> {{ $tax->tax }}
-                                                            ({{ $tax->percentage }}%)
-                                                        </option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-
-                                        </div>
                                         <div class="col-12 px-3">
                                             <hr class="col-12">
                                         </div>
 
-                                        {{-- <div class="col-12 d-flex px-3 justify-content-between">
-                                            <label>Total Price</label>
-                                            <span>RS. 100 /-</span>
-                                        </div>
 
-                                        <div class="col-12 px-2 m-0 p-0">
-                                            <hr class="col-12 m-2 p-0">
-                                        </div> --}}
                                         <div class="card-footer">
                                             <button type="submit"
                                                 class="btn btn-primary">{{ $movie->id ? 'Update' : 'Save' }}</button>
@@ -208,23 +210,22 @@
                             <thead>
                                 <tr>
                                     <th>SN</th>
+                                    <th>Thimbnail</th>
                                     <th>Movie</th>
                                     <th>Language</th>
                                     <th>Tag</th>
                                     <th>Duration</th>
                                     <th>Release Date</th>
-                                    {{-- <th>Cast</th> --}}
-                                    <th>Director</th>
-                                    <th>Price</th>
-                                    {{-- <th>Tax</th> --}}
                                     <th>Action</th>
-                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($movies as $movie)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
+                                        <td>
+                                            <img src="{{asset('storage')}}{{"/"}}{{$movie->thumbnail}}" style="height:70px" alt="">
+                                        </td>
                                         <td>
                                             <b>{{ $movie->movie_name }}</b>
                                             <p>{{ $movie->type->type }}</p>
@@ -243,20 +244,7 @@
                                         </td>
                                         <td> {{ $movie->duration }} Hour </td>
                                         <td> {{ $movie->release_date }} </td>
-                                        {{-- <td> {{ $movie->cast }} </td> --}}
-                                        <td> {{ $movie->director }} </td>
-                                        <td> {{ $movie->price }} </td>
-                                        {{-- <td>
-                                            @foreach ($movie->movie_has_tax as $tax)
-                                                {{ $tax->tax->tax }} ({{ $tax->tax->percentage }}%)
 
-                                                @if (!$loop->last)
-                                                    @php
-                                                        echo ', ';
-                                                    @endphp
-                                                @endif
-                                            @endforeach
-                                        </td> --}}
                                         <td class="d-flex">
                                             <a href="{{ route('movie.shows', $movie) }}" class="btn btn-info">Show</a>
                                             <a href="{{ route('movie.edit', $movie) }}"
@@ -273,15 +261,12 @@
                             <tfoot>
                                 <tr>
                                     <th>SN</th>
+                                    <th>Thimbnail</th>
                                     <th>Movie</th>
                                     <th>Language</th>
                                     <th>Tag</th>
                                     <th>Duration</th>
                                     <th>Release Date</th>
-                                    {{-- <th>Cast</th> --}}
-                                    <th>Director</th>
-                                    <th>Price</th>
-                                    {{-- <th>Tax</th> --}}
                                     <th>Action</th>
                                 </tr>
                             </tfoot>

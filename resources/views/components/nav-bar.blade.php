@@ -50,7 +50,7 @@
                     <i class="fas fa-user mr-2"></i> Profile
                 </a>
                 <div class="dropdown-divider"></div>
-                <a href="{{ route('setting.org') }}" class="dropdown-item">
+                <a href="{{ route('setting.movie') }}" class="dropdown-item">
                     <i class="fas fa-user-cog mr-2"></i> Settings
                 </a>
                 <div class="dropdown-divider"></div>

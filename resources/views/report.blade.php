@@ -25,7 +25,30 @@
                         <div class="card">
                             <div class="card-header">
                                 <div class="col-12 d-flex justify-content-between align-items-center">
-                                    <h3 class="card-title">Users Table</h3>
+                                    <form action="{{route('filter')}}" method="GET" class="col-12">
+                                        <div class="row col-12">
+                                            <div class="col-lg-3">
+                                                <div class="form-group">
+                                                    <input type="date" name="date" class="form-control">
+
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3">
+                                                <div class="form-group">
+                                                    <select class="form-control select2" name="movie"
+                                                        style="width: 100%;">
+                                                        <option value="">Please select a movie type</option>
+
+                                                        @foreach ($movies as $movie)
+                                                                <option value="{{$movie->movie_name}}">{{$movie->movie_name}}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <input type="submit" value="Filter" class="btn btn-info" style="height: 38px">
+                                            <a href="{{route('report')}}" class="btn btn-danger mx-3" style="height: 38px"><i class="fas fa-times"></i></a>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
                             <!-- /.card-header -->
@@ -40,7 +63,6 @@
                                             <th>Booked Date</th>
                                             <th>Seat</th>
                                             <th>Price (Per Seat)</th>
-                                            <th>Total Price</th>
 
                                         </tr>
                                     </thead>
@@ -57,43 +79,22 @@
                                             @endphp
                                             <tr>
                                                 <td>{{ $loop->iteration }}</td>
-                                                <td>ART 020-{{settings()->get("sn_number", $default = "0")+ $report->id }}
+                                                <td>{{$report->pre_sn}}-{{$report->post_sn}}
                                                 </td>
                                                 <td> {{ $report->shows->movie->movie_name }} </td>
                                                 <td> {{ $report->created_at }} </td>
                                                 <td>
-                                                    @foreach ($report->bookedSeat as $seat)
-                                                        {{ $seat->seat }}
-                                                        @php
-                                                            $totalSeat = $totalSeat + 1;
-                                                        @endphp
-                                                        @if (!$loop->last)
-                                                            ,
-                                                        @endif
-                                                    @endforeach
+                                                   {{$report->seat}}
                                                 </td>
 
 
                                                 <td>
-                                                    @foreach ($report->shows->movie->movie_has_tax as $tax)
-                                                        @php
-                                                            $totalTax = $totalTax + $tax->tax->percentage;
-                                                        @endphp
-                                                    @endforeach
+                                                    RS. {{$report->price}}
                                                     @php
-                                                        $totalPrice = $report->shows->movie->price + ($report->shows->movie->price * $totalTax) / 100;
+                                                        $total = $total + $report->price;
                                                     @endphp
-                                                    @php
-                                                        $totalPricePerSeat = $totalPricePerSeat + $totalPrice;
-                                                    @endphp
-                                                    RS. {{ $totalPrice }}
                                                 </td>
-                                                <td>
-                                                    @php
-                                                        $total=$total+($totalPrice * $totalSeat);
-                                                    @endphp
-                                                    RS. {{ $totalPrice * $totalSeat }}
-                                                </td>
+
                                             </tr>
                                         @endforeach
 
@@ -101,8 +102,7 @@
                                     <tfoot>
                                         <tr>
                                             <th colspan="5">Total</th>
-                                            <th> RS. {{ $totalPricePerSeat }} </th>
-                                            <th> RS. {{$total}} </th>
+                                            <th> RS. {{ $total }} </th>
                                         </tr>
                                         <tr>
                                             <th>#</th>
@@ -111,7 +111,6 @@
                                             <th>Booked Date</th>
                                             <th>Seat</th>
                                             <th>Price (Per Seat)</th>
-                                            <th>Total Price</th>
                                         </tr>
                                     </tfoot>
                                 </table>

@@ -92,4 +92,8 @@ class HomeController extends Controller
     public function security(){
         return view('layouts.settings.security');
     }
+
+    public function movieSetting(){
+        return view('layouts.settings.movieSetting');
+    }
 }

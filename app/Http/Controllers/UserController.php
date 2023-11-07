@@ -103,4 +103,28 @@ class UserController extends Controller
     public function movieSearch(Request $request){
         return $request;
     }
+
+    public function changePrice(Request $request){
+        if($request->gold_ticket_price){
+            settings()->set("gold_ticket_price", $request->gold_ticket_price);
+        }
+
+        if($request->silver_ticket_price){
+            settings()->set("silver_ticket_price", $request->silver_ticket_price);
+        }
+
+        return redirect()->back()->with("success","Ticket Price change successfully");
+    }
+
+    public function serialNumber(Request $request){
+        if($request->pre_sn){
+            settings()->set("pre_sn", $request->pre_sn);
+        }
+
+        if($request->post_sn){
+            settings()->set("post_sn", $request->post_sn);
+        }
+
+        return redirect()->back()->with("success","Serial number setting change successfully");
+    }
 }

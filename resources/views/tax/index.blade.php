@@ -100,6 +100,44 @@
                                                                 class="font-weight-normal text-danger">{{ $message }}</small>
                                                         @enderror
                                                     </div>
+                                                    <div class="form-group">
+                                                        <label for="exampleInputPassword1">Tax For *:</label>
+                                                        <select class="form-control select2" required multiple
+                                                            style="width: 100%;" name="type_id[]">
+                                                            @foreach ($types as $type)
+                                                                {{-- @if ($movie->id || $k < $l - 1)
+                                                                    @if ($l > 0)
+                                                                        <option value="{{ $tax->id }}"
+                                                                            {{ $tax->id == $movie->movie_has_tax[$k]->taxe_id ? 'selected' : '' }}>
+                                                                            {{ $tax->tax }} ({{ $tax->percentage }}%)
+                                                                        </option>
+
+
+                                                                        @php
+                                                                            if ($tax->id == $movie->movie_has_tax[$k]->taxe_id && $k < $l - 1) {
+                                                                                $k++;
+                                                                            }
+                                                                        @endphp
+                                                                    @else
+                                                                        <option value="{{ $tax->id }}">
+                                                                            {{ $tax->tax }} ({{ $tax->percentage }}%)
+                                                                        </option>
+                                                                    @endif
+                                                                @else
+                                                                    <option value="{{ $tax->id }}">
+                                                                        {{ $tax->tax }} ({{ $tax->percentage }}%)
+                                                                    </option>
+                                                                @endif --}}
+                                                                <option value="{{ $type->id }}">
+                                                                    {{$type->type}}
+                                                                </option>
+                                                            @endforeach
+                                                        </select>
+                                                        @error('taxe_id')
+                                                            <small
+                                                                class="font-weight-normal text-danger">{{ $message }}</small>
+                                                        @enderror
+                                                    </div>
                                                     <div class="card-footer">
                                                         <button type="submit"
                                                             class="btn btn-primary">{{ $tax->id ? 'Update' : 'Save' }}</button>
@@ -121,6 +159,7 @@
                                             <th>SN</th>
                                             <th>Tax</th>
                                             <th>percentage</th>
+                                            <th>Tax On</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -130,6 +169,13 @@
                                                 <td>{{ $loop->iteration }}</td>
                                                 <td>{{ $tax->tax }}</td>
                                                 <td>{{ $tax->percentage }} %</td>
+                                                <td>
+                                                    @foreach ($tax->taxFor as $taxFor)
+                                                        <div class="badge badge-info">
+                                                            {{$taxFor->type->type}}
+                                                        </div>
+                                                    @endforeach
+                                                </td>
                                                 <td class="d-flex">
                                                     <a href="{{ route('tax.edit', $tax) }}"
                                                         class="btn btn-warning">Edit</a>
@@ -148,6 +194,7 @@
                                             <th>SN</th>
                                             <th>Tax</th>
                                             <th>percentage</th>
+                                            <th>Tax On</th>
                                             <th>Action</th>
                                         </tr>
                                     </tfoot>

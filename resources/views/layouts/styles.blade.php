@@ -221,7 +221,7 @@
     #imagePreview {
         position: absolute;
         top: 0;
-        height: 355px;
+        height: 268px;
         border: 1px dashed #ccc;
         background-size: cover;
         background-repeat: no-repeat;
@@ -358,4 +358,9 @@
     .searchInput{
         height: 50px;
     }
+    .seat-price{
+        position: absolute;
+        opacity: 0;
+    }
+@page { size: auto;  margin: 0mm; }
 </style>

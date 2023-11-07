@@ -26,6 +26,7 @@
                     <div class="card-body">
                         <div class="row setting">
                             <div class="col-md-3 right-border">
+                                <a href="{{route('setting.movie')}}" class="setting-menu {{\Request::segment(1)=="movie-setting" ? 'active' : ''}}">Movie Settings</a>
                                 <a href="{{route('setting.org')}}" class="setting-menu {{\Request::segment(1)=="organization-setting" ? 'active' : ''}}">Organization Settings</a>
                                 <a href="{{route('setting.security')}}" class="setting-menu {{\Request::segment(1)=="security-setting" ? 'active' : ''}}">Security & Password</a>
                             </div>
