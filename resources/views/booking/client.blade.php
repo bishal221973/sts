@@ -213,40 +213,40 @@
             </div><!-- /.container-fluid -->
         </div>
         <section class="content">
+           <div class="my-div">
             <div class="row">
                 @foreach ($bookId as $item)
                     @php
                         $movie = App\Models\Book::with('shows.movie.type.taxFor.tax')->find($item);
                     @endphp
-                    <div class="row px-1">
-                        <div class="invoice">
-                            <div class="card">
-
+                    <div class="row px-1" style="overflow: hidden">
+                        <div class="invoice" style="width: 100vw;">
+                            <div class="card" style="width: 100vw">
                                 <div class="card-body" id="printThis{{ $item }}">
-                                    <div class="col-12 d-flex justify-content-center">
+                                    {{-- <div class="col-12"> --}}
                                         <img src="{{ asset('storage') }}{{ '/' }}{{ settings()->get('logo') }}"
-                                            alt="" style="width: 300px">
-                                    </div>
-                                    <label class="font-weight-normal col-12 text-center m-0 p-0">Tax Invoice</label>
-                                    <h4 class="col-12 text-center font-weight-bold m-0 p-0">
-                                        {{ settings()->get('org_full_name', $default = 'STS Cinema') }}</h4>
-                                    <label
-                                        class="col-12 text-center m-0 p-0">{{ settings()->get('org_address', $default = 'Dhangadhi, Kailali') }}</label>
+                                            alt="" style="width: 40%;position: relative;left:30%">
+                                    {{-- </div> --}}
+                                    <h4 style="width: 100%;text-align:center;font-weight-bold">
+                                        <b>{{ settings()->get('org_full_name', $default = 'STS Cinema') }}</b></h4>
+                                        <label
+                                        class="col-12 text-center m-0 p-0 font-weight-normal" style="position:relative;top:-10px">{{ settings()->get('org_address', $default = 'Dhangadhi, Kailali') }}</label>
+                                        <h5 style="width: 100%;text-align:center;font-weight-bold" ><b>Tax Invoice</b></h5>
 
                                     <div class="col-12 d-flex justify-content-between mt-2 mb-0">
                                         <div class="d-flex">
-                                            <label class="font-weight-normal">S.N. :</label>
+                                            <label class="font-weight-normal">S.No. &nbsp;:&nbsp;</label>
                                             <h5>{{ $movie->pre_sn }}-{{ $movie->post_sn }}</h5>
                                         </div>
                                         <div class="d-flex">
-                                            <label class="font-weight-normal">Vat No. :</label>
+                                            <label class="font-weight-normal">Vat No. &nbsp;</label>
                                             <h5>{{ settings()->get('org_vat_number', $default = '123456789') }}</h5>
                                         </div>
                                     </div>
 
                                     <div class="col-12 d-flex justify-content-between m-0">
                                         <div class="d-flex">
-                                            <label class="font-weight-normal">Movie :</label>
+                                            <label class="font-weight-normal">Movie &nbsp;:&nbsp;</label>
                                             <h5 class="font-weight-bold">{{ $movie->movie_name }}</h5>
                                         </div>
 
@@ -254,28 +254,28 @@
 
                                     <div class="col-12 d-flex justify-content-between">
                                         <div class="d-flex">
-                                            <label class="font-weight-normal">Screen :</label>
+                                            <label class="font-weight-normal">Screen &nbsp;:&nbsp;</label>
                                             <h5>Screen 1</h5>
                                         </div>
                                         <div class="d-flex">
-                                            <label class="font-weight-normal">Seat Type :</label>
-                                            <h5>{{ $movie->seat_type }}</h5>
+                                            <label class="font-weight-normal">Type &nbsp;:&nbsp; </label>
+                                            <h5><b>{{ $movie->seat_type }}</b></h5>
                                         </div>
                                     </div>
                                     <div class="col-12 d-flex justify-content-between">
                                         <div class="d-block">
-                                            <h5 class="font-weight-normal m-0 p-0 col-12 text-center">Date</h5>
-                                            <h5 class="font-weight-bold">{{ $movie->date }}</h5>
+                                            <h5 class="font-weight-normal m-0 p-0 col-12">Date</h5>
+                                            <h5 class="font-weight-bold">{{ date('d/m/Y',strtotime($movie->date)) }}</h5>
                                         </div>
                                         <div class="d-block">
                                             <h5 class="font-weight-normal m-0 p-0 col-12 text-center">Time</h5>
-                                            <h5 class="font-weight-bold"> {{ $movie->time }} </h5>
+                                            <h5 class="font-weight-bold text-uppercase" style="font-size:25px"> {{ date('h:i a',strtotime($movie->time)) }} </h5>
                                         </div>
 
                                         <div class="d-block">
-                                            <h5 class="font-weight-normal m-0 p-0 col-12 text-center">Seat</h5>
-                                            <div class="col-12 d-flex">
-                                                <h4 class="font-weight-bold">{{ $movie->seat }}</h4>
+                                            <h5 class="font-weight-normal m-0 p-0 col-12 text-center">Seat Number</h5>
+                                            <div class="col-12 d-flex justify-content-center">
+                                                <h4 class="font-weight-bold" style="font-size:30px">{{ $movie->seat }}</h4>
                                             </div>
                                         </div>
                                     </div>
@@ -326,7 +326,7 @@
                                                 @endphp
 
                                                 <h5 class="font-weight-normal">Entrance Fee :</h5>
-                                                <h5 class="font-weight-normal">Rs. {{ round($priceBeforeTax,2) }}
+                                                <h5 class="font-weight-normal">&nbsp;Rs. {{ round($priceBeforeTax,2) }}
                                                 </h5>
                                             </div>
 
@@ -336,7 +336,7 @@
                                                         <h5 class="font-weight-normal">{{ $tax->tax->tax }}
                                                             ({{ $tax->tax->percentage }}%)
                                                             :</h5>
-                                                        <h5 class="font-weight-normal">Rs.
+                                                        <h5 class="font-weight-normal">&nbsp;Rs.
                                                             {{ round($priceBeforeTax*($tax->tax->percentage/100), 2) }}
                                                         </h5>
 
@@ -357,7 +357,7 @@
                                                         <h5 class="font-weight-normal">{{ $tax->tax->tax }}
                                                             ({{ $tax->tax->percentage }}%)
                                                             :</h5>
-                                                        <h5 class="font-weight-normal">Rs.
+                                                        <h5 class="font-weight-normal">&nbsp;Rs.
                                                             @php
                                                                 $totalAmount = $beforeVat + $beforeVat * ($tax->tax->percentage / 100);
                                                             @endphp
@@ -367,15 +367,15 @@
                                                 @endif
                                             @endforeach
                                             <div class="d-flex justify-content-end">
-                                                <h5 class="font-weight-normal">Total Cost :</h5>
-                                                <h5 class="font-weight-normal">Rs. {{ round($movie->price, 2) }}
+                                                <h5 class="font-weight-normal"><b>Total Cost :</b></h5>
+                                                <h5 class="font-weight-normal"><b> &nbsp; Rs. {{ round($movie->price, 2) }}</b>
                                                 </h5>
                                             </div>
                                         </div>
                                     </div>
                                     {{-- <h3 class="text-center font-weight-bold mt-3">Copy of Original -1</h3> --}}
-                                    <label class="mt-3">Terms and Conditions</label>
-                                    <ul class="m-0 p-0 pl-3">
+                                    <label class="mt-3 font-weight-normal">Terms and Condition.</label>
+                                    <ul class="m-0 p-0 pl-3" style="position: relative;top:-5px">
                                         <li>Tickets once sold can not be refunded.</li>
                                         <li>Lost, Stolen or damaged tickets will not be replaced.</li>
                                         <li>Seat allocation can not be altered after the purchase of the tickets.</li>
@@ -383,12 +383,12 @@
 
                                     <div class="col-12 d-flex justify-content-between">
                                         <div class="d-block">
-                                            <b>Printed By : {{ Auth()->user()->name }}</b> <br>
-                                            <b>Printed By : {{ $movie->created_at }}</b>
+                                            <span>Printed By : {{ Auth()->user()->name }}</span> <br>
+                                            <span class="text-uppercase">Printed By : {{ date('Y/m/d',strtotime($movie->created_at)) }} &nbsp; {{ date('h:i a',strtotime($movie->created_at)) }}</span>
                                         </div>
                                         <div class="d-block">
                                             <b></b> <br>
-                                            <b>Enjoy your movie at Dhangadhi</b>
+                                            <span>Enjoy your movie at Dhangadhi</span>
                                         </div>
                                     </div>
                                 </div>
@@ -398,6 +398,7 @@
                     </div>
                 @endforeach
             </div>
+           </div>
 
             <!-- /.container-fluid -->
         </section>
@@ -412,13 +413,10 @@
             var printContents = document.getElementById(divId).innerHTML;
             var originalContents = document.body.innerHTML;
 
-            // Replace the entire document's contents with the contents of the specified div
             document.body.innerHTML = printContents;
 
-            // Initiate the print dialog
             window.print();
 
-            // Restore the original document contents
             document.body.innerHTML = originalContents;
         }
         $(document).ready(function() {
@@ -437,6 +435,8 @@
                         var divId = 'printThis' + dataResult[i];
                         printDiv(divId);
                     }
+                    var url=window.location.origin;
+                    window.location.href=url;
                 }
             });
         });
