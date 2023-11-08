@@ -13,20 +13,20 @@
 <link rel="stylesheet" href="{{ asset('plugins/select2/css/select2.min.css') }}">
 <link rel="stylesheet" href="{{ asset('plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">
 
-<link rel="stylesheet" href="{{asset('plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css')}}">
-  <!-- Toastr -->
-  <link rel="stylesheet" href="{{asset('plugins/toastr/toastr.min.css')}}">
+<link rel="stylesheet" href="{{ asset('plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css') }}">
+<!-- Toastr -->
+<link rel="stylesheet" href="{{ asset('plugins/toastr/toastr.min.css') }}">
 
 <link rel="stylesheet" href="{{ asset('dist/css/adminlte.min.css') }}">
 <style>
     .time-list {
         position: relative;
         height: 80px;
-    width: 200px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    /* padding-top: 40px; */
+        width: 200px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        /* padding-top: 40px; */
     }
 
     .time-list.active {
@@ -49,13 +49,15 @@
     .time-list.isChecked {
         background-color: red !important;
     }
-.btn-next{
-    height: 80px;
-    width: 200px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
+
+    .btn-next {
+        height: 80px;
+        width: 200px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
     .grid {
         display: grid;
         grid-template-columns: repeat(22, 1fr);
@@ -178,12 +180,14 @@
             width: 16vw;
         }
     }
+
     @media screen and (max-width: 1654px) {
         .movieThumbnail {
             height: 350px;
             width: 15vw;
         }
     }
+
     @media screen and (max-width: 1560px) {
         .movieThumbnail {
             height: 350px;
@@ -197,6 +201,7 @@
             width: 18vw;
         }
     }
+
     .zoom:hover .movieThumbnail {
         transform: scale(1.1);
     }
@@ -369,16 +374,102 @@
         font-weight: 900;
         color: #ffffff;
     }
-    .searchInput{
+
+    .searchInput {
         height: 50px;
     }
-    .seat-price{
+
+    .seat-price {
         position: absolute;
         opacity: 0;
     }
-    .seat-scroll{
+
+    .seat-scroll {
         height: 55vh;
-        overflow-y:scroll;
+        overflow-y: scroll;
     }
-@page { size: auto;  margin: 0mm; }
+
+    @page {
+        size: auto;
+        margin: 0mm;
+    }
+
+
+    /* ================================================ */
+    .main-title {
+        width: 100%;
+        font-weight: bold;
+        position: relative;
+        left: 22%;
+        font-size: 25px;
+    }
+
+    .sts-address {
+        position: relative;
+        top: -10px;
+        left: 30%;
+        font-size: 20px;
+    }
+
+    .tax-invoice {
+        width: 100%;
+        font-weight: bold;
+        position: relative;
+        left: 37%;
+        font-size: 23px;
+    }
+
+    .logo-img-print {
+        width: 84%;
+        position: relative;
+        left: 7%;
+    }
+
+    @media print {
+        * {
+            color: #000 !important;
+        }
+
+        body {
+            /* transform: scale(.5); */
+        }
+
+        .logo-img-print {
+            width: 39%;
+            position: relative;
+            left: 7%;
+        }
+
+        .main-title {
+            width: 100%;
+            font-weight: bold;
+            position: relative;
+            left: 12%;
+            font-size: 25px;
+        }
+
+        .sts-address {
+            position: relative;
+            top: -10px;
+            left: 17%;
+            font-size: 20px;
+        }
+
+        .tax-invoice {
+            width: 100%;
+            font-weight: bold;
+            position: relative;
+            left: 20%;
+            font-size: 23px;
+        }
+
+        .fs-20 {
+            font-size: 20px;
+        }
+
+        .fs-18 {
+            font-weight: bold;
+        }
+
+    }
 </style>
