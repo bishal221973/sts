@@ -40,7 +40,7 @@
             <div class="col-12">
                 <div class="row">
                     <div class="col-lg-3">
-                        <a href="{{route('movie.index')}}" class="card bg-info cursur-pointer">
+                        <a href="{{ route('movie.index') }}" class="card bg-info cursur-pointer">
                             <div class="card-body">
                                 <h5 class="font-weight-bold text-uppercase m-0 p-0">Total Movies</h5>
                                 <div class="d-flex justify-content-end">
@@ -59,7 +59,7 @@
                             </div>
                         </div>
                     </div>
-                    <a href="{{route('report')}}" class="col-lg-3">
+                    <a href="{{ route('report') }}" class="col-lg-3">
                         <div class="card bg-success cursur-pointer">
                             <div class="card-body">
                                 <h5 class="font-weight-bold text-uppercase m-0 p-0">Total Booked Seat</h5>
@@ -71,7 +71,7 @@
                     </a>
 
                     <div class="col-lg-3">
-                        <a href="{{route('users.index')}}" class="card bg-danger cursur-pointer">
+                        <a href="{{ route('users.index') }}" class="card bg-danger cursur-pointer">
                             <div class="card-body">
                                 <h5 class="font-weight-bold text-uppercase m-0 p-0">Total User</h5>
                                 <div class="d-flex justify-content-end">
@@ -155,6 +155,18 @@
                                 <div class="progress-point"></div>
                             </div>
                         </div>
+                    </div>
+                </div>
+
+
+                <div class="px-3 col-12 ">
+                    <div class="col-12 card">
+                        <div class="card-header">
+                            Latest Movie Bookings
+                        </div>
+                        {{-- <div class="card-body"> --}}
+                        <canvas id="myChart" style="height: 450px;background-color: #fff;"></canvas>
+                        {{-- </div> --}}
                     </div>
                 </div>
             </div>
@@ -245,3 +257,20 @@
         </div>
     </div>
 @endsection
+@push('chart')
+    <script>
+        const ctx = document.getElementById('myChart');
+
+        new Chart(ctx, {
+            type: 'line',
+            data: <?php echo $outputJson; ?>,
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+@endpush

@@ -34,6 +34,9 @@
  <script src="https://cdn.jsdelivr.net/npm/qrious@4.0.2/dist/qrious.min.js"></script>
  <script src="{{asset('qr.js')}}"></script>
  {{-- <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script> --}}
+ {{-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> --}}
+
+ @stack('chart')
 
 
  <script>

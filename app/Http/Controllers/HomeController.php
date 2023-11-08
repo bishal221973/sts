@@ -31,15 +31,15 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $movies = Movie::with('type', 'language', 'movie_has_tag.tag', 'movie_has_tax.tax',"movieShow")->latest()->get();
+        $movies = Movie::with('type', 'language', 'movie_has_tag.tag', 'movie_has_tax.tax', "movieShow")->latest()->get();
         $movieLists = Movie::with('type', 'language', 'movie_has_tag.tag', 'movie_has_tax.tax', 'movieShow')
-    ->latest()
-    ->paginate(10);
+            ->latest()
+            ->paginate(10);
 
-// Get and return the current page number of the paginated results.
-// return $currentPage = $movieLists->items();
+        // Get and return the current page number of the paginated results.
+        // return $currentPage = $movieLists->items();
 
-// return $movieLists;
+        // return $movieLists;
 
         //  $counts = DB::table('booked_seats')
         // ->select('movie_id', DB::raw('count(*) as seat_count'))
@@ -47,12 +47,35 @@ class HomeController extends Controller
         // ->orderBy('seat_count', 'desc')
         // ->limit(3)
         // ->get();
-    // ->orderBy('count', 'desc')
-        $totalMovie=Movie::count();
-        $bookedSet=Book::count();
-        $user=User::count();
-        $totalShows=MovieShow::count();
-        return view('home',compact('movies','movieLists','totalMovie','bookedSet','totalShows','user'));
+        // ->orderBy('count', 'desc')
+        $totalMovie = Movie::count();
+        $bookedSet = Book::count();
+        $user = User::count();
+        $totalShows = MovieShow::count();
+        $collection = Book::get();
+        $groupedData = collect($collection)->groupBy('date')->map(function ($items) {
+            return [
+                'count' => $items->count(),
+                'date' => $items[0]['date'],
+            ];
+        })->values()->sortByDesc('date')->take('10')->values()->toArray();
+        foreach ($groupedData as $item) {
+            $labels[] = $item['date'];
+            // You can adjust this line to retrieve the appropriate count or data value from your item
+            $data[] = $item['count'];
+        }
+        $output = [
+            'labels' => $labels,
+            'datasets' => [
+                [
+                    'label' => '# of Votes', // No need for htmlspecialchars in JavaScript
+                    'data' => $data,
+                    'borderWidth' => 1,
+                ],
+            ],
+        ];
+        $outputJson = json_encode($output);
+        return view('home', compact('movies', 'movieLists', 'totalMovie', 'bookedSet', 'totalShows', 'user','outputJson'));
     }
 
     public function profile()
@@ -61,39 +84,42 @@ class HomeController extends Controller
     }
     public function profileUpdate(Request $request, User $user)
     {
-        $data=$request->validate([
-            'name'=>'required',
-            'email'=>'required',
-            'gender'=>'nullable',
-            'contact'=>'nullable',
-            'avatar'=>'nullable',
+        $data = $request->validate([
+            'name' => 'required',
+            'email' => 'required',
+            'gender' => 'nullable',
+            'contact' => 'nullable',
+            'avatar' => 'nullable',
         ]);
 
 
-        if($request->email){
-            $data['email_verified_at']=null;
+        if ($request->email) {
+            $data['email_verified_at'] = null;
         }
 
-        if($request->hasFile('avatar')){
-            if($user->avatar){
+        if ($request->hasFile('avatar')) {
+            if ($user->avatar) {
                 Storage::delete($user->avatar);
             }
-            $data['avatar']=$request->file('avatar')->store('avatar');
+            $data['avatar'] = $request->file('avatar')->store('avatar');
         }
         $user->update($data);
 
-        return redirect()->back()->with("success","User profile changed.");
+        return redirect()->back()->with("success", "User profile changed.");
     }
 
-    public function orgSetting(){
+    public function orgSetting()
+    {
         return view('layouts.settings.orgSetting');
     }
 
-    public function security(){
+    public function security()
+    {
         return view('layouts.settings.security');
     }
 
-    public function movieSetting(){
+    public function movieSetting()
+    {
         return view('layouts.settings.movieSetting');
     }
 }
