@@ -162,7 +162,7 @@
                 <div class="px-3 col-12 ">
                     <div class="col-12 card">
                         <div class="card-header">
-                            Latest Movie Bookings
+                            Total sold tickets
                         </div>
                         {{-- <div class="card-body"> --}}
                         <canvas id="myChart" style="height: 450px;background-color: #fff;"></canvas>
