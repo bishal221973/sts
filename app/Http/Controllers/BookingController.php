@@ -44,12 +44,32 @@ class BookingController extends Controller
         $pre=settings()->get('pre_sn');
         $sn=settings()->get('post_sn');
         $bookId = [];
+
+        if(!$request->seatName){
+            return redirect()->back()->with('error','Please select a seat');
+        }
         foreach ($request->seatName as $key => $seat) {
             $books=Book::latest()->latest()->first();
             if($books){
+                if(settings()->get('isChanged',$default="false")=='true'){
+                        $sn=$sn+1;
+                        settings()->set("isChnaged",'false');
+                    // return "sds";
+                }else{
+                    // return "sds1";
+                        $sn=$books->post_sn+1;
+
+                }
+                // if($isChanged){
+                //     return "Hello";
+                //     return settings()->get("isChanged");
+                // }else{
+                //     return "Bishal";
+                // }
                 // return $books;
-                $sn=$books->post_sn+1;
             }
+
+
             settings()->get('silver_ticket_price');
             if(settings()->get('silver_ticket_price')!=$request->seatPrice[$key]){
                 // return $request->seatPrice[$key];

@@ -53,6 +53,7 @@ Route::get('print',[BookingController::class,'print'])->name('print');
 Route::get('print-data',[BookingController::class,'printData'])->name('printData');
 Route::get('prints/{id}',[BookingController::class,'prints'])->name('prints');
 Route::get('filter',[BookingController::class,'filter'])->name('filter');
+Route::get('unknown-computer-detected',[SettingController::class,'404'])->name('404');
 
 
 

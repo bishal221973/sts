@@ -2,6 +2,7 @@
 
 namespace App\View\Components;
 
+use App\Models\Movie;
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
@@ -21,6 +22,7 @@ class LeftSidebar extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.left-sidebar');
+        $latestMovies=Movie::latest()->limit('3')->get();
+        return view('components.left-sidebar',compact('latestMovies'));
     }
 }

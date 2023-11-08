@@ -49,7 +49,7 @@ class HomeController extends Controller
         // ->get();
     // ->orderBy('count', 'desc')
         $totalMovie=Movie::count();
-        $bookedSet=BookedSeat::count();
+        $bookedSet=Book::count();
         $user=User::count();
         $totalShows=MovieShow::count();
         return view('home',compact('movies','movieLists','totalMovie','bookedSet','totalShows','user'));

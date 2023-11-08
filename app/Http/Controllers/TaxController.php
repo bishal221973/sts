@@ -62,8 +62,17 @@ class TaxController extends Controller
             'percentage' => 'required',
         ]);
 
+        if($request->type_id){
+            TaxFor::where('taxe_id', $tax->id)->delete();
+        }
+        foreach ($request->type_id as $id) {
+            TaxFor::create([
+                'taxe_id' => $tax->id,
+                'type_id' => $id,
+            ]);
+        }
         $tax->update($data);
 
-        return redirect()->route('tax.index')->with('success', 'Selected tax remove successfully.');
+        return redirect()->route('tax.index')->with('success', 'Selected tax update successfully.');
     }
 }

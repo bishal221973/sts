@@ -18,7 +18,23 @@
             </div><!-- /.container-fluid -->
         </div>
 
+        @if (session()->has('error'))
+        @push('toast')
+            <script>
+                var Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 3000
+                });
 
+                Toast.fire({
+                    icon: 'error',
+                    title: '{{ session()->get('error') }}'
+                })
+            </script>
+        @endpush
+    @endif
 
         <section class="content">
             <div class="col-12 d-flex justify-content-between">

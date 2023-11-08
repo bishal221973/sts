@@ -79,7 +79,7 @@
                                             @endphp
                                             <tr>
                                                 <td>{{ $loop->iteration }}</td>
-                                                <td>{{$report->pre_sn}}-{{$report->post_sn}}
+                                                <td>{{$report->pre_sn}}-000{{$report->post_sn}}
                                                 </td>
                                                 <td> {{ $report->shows->movie->movie_name }} </td>
                                                 <td> {{ $report->created_at }} </td>

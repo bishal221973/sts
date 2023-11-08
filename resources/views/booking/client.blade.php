@@ -237,8 +237,8 @@
 
                                         <div class="d-flex justify-content-between mt-2 mb-0" style="width: 500px">
                                             <div class="d-flex">
-                                                <label class="fs-20 font-weight-normal">S.No. &nbsp;:&nbsp;</label>
-                                                <h5 class="fs-20">{{ $movie->pre_sn }}-{{ $movie->post_sn }}</h5>
+                                                <label class="fs-20 font-weight-normal">S.No. :&nbsp;</label>
+                                                <h5 class="fs-20">{{ $movie->pre_sn }}-000{{ $movie->post_sn }}</h5>
                                             </div>
                                             <div class="d-flex">
                                                 <label class="fs-20 font-weight-normal">Vat No. &nbsp;</label>
@@ -248,7 +248,7 @@
 
                                         <div class="col-12 d-flex justify-content-between m-0 p-0">
                                             <div class="d-flex">
-                                                <label class="fs-20 font-weight-normal">Movie &nbsp;:&nbsp;</label>
+                                                <label class="fs-20 font-weight-normal">Movie :&nbsp;</label>
                                                 <h5 class="fs-20 font-weight-bold">{{ $movie->movie_name }}</h5>
                                             </div>
 
@@ -256,11 +256,11 @@
 
                                         <div class="d-flex justify-content-between" style="width: 500px">
                                             <div class="d-flex">
-                                                <label class="fs-20 font-weight-normal">Screen &nbsp;:&nbsp;</label>
+                                                <label class="fs-20 font-weight-normal">Screen :&nbsp;</label>
                                                 <h5 class="fs-20">Screen 1</h5>
                                             </div>
                                             <div class="d-flex">
-                                                <label class="fs-20 font-weight-normal">Type &nbsp;:&nbsp; </label>
+                                                <label class="fs-20 font-weight-normal">Type :&nbsp; </label>
                                                 <h5><b class="fs-20">{{ $movie->seat_type }}</b></h5>
                                             </div>
                                         </div>
@@ -381,22 +381,22 @@
                                         </div>
                                         {{-- <h3 class="text-center font-weight-bold mt-3">Copy of Original -1</h3> --}}
                                         <label class="mt-3 font-weight-bold fs-18">Terms and Condition.</label>
-                                        <ul class="m-0 p-0 pl-3" style="position: relative;top:-5px">
+                                        <ol class="m-0 p-0 pl-3" style="position: relative;top:-5px">
                                             <li class="fs-18">Tickets once sold can not be refunded.</li>
                                             <li class="fs-18">Lost, Stolen or damaged tickets will not be replaced.</li>
                                             <li class="fs-18">Seat allocation can not be altered after the purchase of the tickets.</li>
-                                        </ul>
+                                        </ol>
 
                                         <div class="d-flex justify-content-between" style="width: 500px">
                                             <div class="d-block">
                                                 <span class="fs-18">Printed By : {{ Auth()->user()->name }}</span> <br>
                                                 <span class="text-uppercase fs-18">Printed By :
-                                                    {{ date('Y/m/d', strtotime($movie->created_at)) }} &nbsp;
-                                                    {{ date('h:i a', strtotime($movie->created_at)) }}</span>
+                                                    {{ date('Y/m/d', strtotime(now())) }} &nbsp;
+                                                    {{ date('h:i a', strtotime(now())) }}</span>
                                             </div>
                                             <div class="d-block">
                                                 <b></b> <br>
-                                                <span class="fs-18">Enjoy your movie at Dhangadhi</span>
+                                                <span class="fs-18">Enjoy your movie at sts cinema</span>
                                             </div>
                                         </div>
                                     </div>

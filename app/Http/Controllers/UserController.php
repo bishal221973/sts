@@ -123,6 +123,7 @@ class UserController extends Controller
 
         if($request->post_sn){
             settings()->set("post_sn", $request->post_sn);
+            settings()->set("isChanged", 'true');
         }
 
         return redirect()->back()->with("success","Serial number setting change successfully");

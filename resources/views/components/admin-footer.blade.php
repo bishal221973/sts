@@ -4,6 +4,6 @@
         Anything you want
     </div>
     <!-- Default to the left -->
-    <strong>Copyright &copy; 2023 <a href="#">ABS Infosys pvt.Ltd</a>.</strong> All rights
+    <strong>Copyright &copy; 2023 ABS Infosys pvt.Ltd.</strong> All rights
     reserved.
 </footer>

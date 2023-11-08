@@ -88,7 +88,7 @@ class MovieController extends Controller
             'type_id' => 'required',
             'duration' => 'required',
             'release_date' => 'required',
-            'trailer' => 'required',
+            'trailer' => 'nullable',
             'thumbnail' => 'nullable',
         ]);
 

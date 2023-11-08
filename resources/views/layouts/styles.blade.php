@@ -435,7 +435,7 @@
         }
 
         .logo-img-print {
-            width: 39%;
+            width: 35%;
             position: relative;
             left: 7%;
         }
