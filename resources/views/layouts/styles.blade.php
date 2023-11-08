@@ -21,10 +21,17 @@
 <style>
     .time-list {
         position: relative;
+        height: 80px;
+    width: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* padding-top: 40px; */
     }
 
     .time-list.active {
         display: block !important;
+        padding-top: 27px;
     }
 
     .time-list input {
@@ -38,10 +45,17 @@
         opacity: 0;
     }
 
+
     .time-list.isChecked {
         background-color: red !important;
     }
-
+.btn-next{
+    height: 80px;
+    width: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
     .grid {
         display: grid;
         grid-template-columns: repeat(22, 1fr);
@@ -116,7 +130,7 @@
     .screen {
         background-color: brown;
         margin-top: 20px;
-        height: 100px;
+        height: 90px;
         border-top-left-radius: 50%;
         border-top-right-radius: 50%;
         color: #fff;
@@ -361,6 +375,10 @@
     .seat-price{
         position: absolute;
         opacity: 0;
+    }
+    .seat-scroll{
+        height: 55vh;
+        overflow-y:scroll;
     }
 @page { size: auto;  margin: 0mm; }
 </style>

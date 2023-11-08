@@ -213,192 +213,200 @@
             </div><!-- /.container-fluid -->
         </div>
         <section class="content">
-           <div class="my-div">
-            <div class="row">
-                @foreach ($bookId as $item)
-                    @php
-                        $movie = App\Models\Book::with('shows.movie.type.taxFor.tax')->find($item);
-                    @endphp
-                    <div class="row px-1" style="overflow: hidden">
-                        <div class="invoice" style="width: 100vw;">
-                            <div class="card" style="width: 100vw">
-                                <div class="card-body" id="printThis{{ $item }}">
-                                    {{-- <div class="col-12"> --}}
+            <div class="my-div">
+                <div class="row">
+                    @foreach ($bookId as $item)
+                        @php
+                            $movie = App\Models\Book::with('shows.movie.type.taxFor.tax')->find($item);
+                        @endphp
+                        <div class="row px-1" style="overflow: hidden">
+                            <div class="invoice" style="width: 550px;">
+                                <div class="card" style="width: 550px">
+                                    <div class="card-body" id="printThis{{ $item }}">
+                                        {{-- <div class="col-12"> --}}
                                         <img src="{{ asset('storage') }}{{ '/' }}{{ settings()->get('logo') }}"
-                                            alt="" style="width: 40%;position: relative;left:30%">
-                                    {{-- </div> --}}
-                                    <h4 style="width: 100%;text-align:center;font-weight-bold">
-                                        <b>{{ settings()->get('org_full_name', $default = 'STS Cinema') }}</b></h4>
-                                        <label
-                                        class="col-12 text-center m-0 p-0 font-weight-normal" style="position:relative;top:-10px">{{ settings()->get('org_address', $default = 'Dhangadhi, Kailali') }}</label>
-                                        <h5 style="width: 100%;text-align:center;font-weight-bold" ><b>Tax Invoice</b></h5>
+                                            alt="" style="width: 39%;position: relative;left:3%">
+                                        {{-- </div> --}}
+                                        <h4 style="width: 100%;font-weight-bold;position: relative;left:8%">
+                                            <b>{{ settings()->get('org_full_name', $default = 'STS Cinema') }}</b>
+                                        </h4>
+                                        <label class="col-12 m-0 p-0 font-weight-normal"
+                                            style="position:relative;top:-10px;left:13%">{{ settings()->get('org_address', $default = 'Dhangadhi, Kailali') }}</label>
+                                        <h5 style="width: 100%;font-weight-bold;position: relative;left:16%"><b>Tax
+                                                Invoice</b></h5>
 
-                                    <div class="col-12 d-flex justify-content-between mt-2 mb-0">
-                                        <div class="d-flex">
-                                            <label class="font-weight-normal">S.No. &nbsp;:&nbsp;</label>
-                                            <h5>{{ $movie->pre_sn }}-{{ $movie->post_sn }}</h5>
-                                        </div>
-                                        <div class="d-flex">
-                                            <label class="font-weight-normal">Vat No. &nbsp;</label>
-                                            <h5>{{ settings()->get('org_vat_number', $default = '123456789') }}</h5>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-12 d-flex justify-content-between m-0">
-                                        <div class="d-flex">
-                                            <label class="font-weight-normal">Movie &nbsp;:&nbsp;</label>
-                                            <h5 class="font-weight-bold">{{ $movie->movie_name }}</h5>
-                                        </div>
-
-                                    </div>
-
-                                    <div class="col-12 d-flex justify-content-between">
-                                        <div class="d-flex">
-                                            <label class="font-weight-normal">Screen &nbsp;:&nbsp;</label>
-                                            <h5>Screen 1</h5>
-                                        </div>
-                                        <div class="d-flex">
-                                            <label class="font-weight-normal">Type &nbsp;:&nbsp; </label>
-                                            <h5><b>{{ $movie->seat_type }}</b></h5>
-                                        </div>
-                                    </div>
-                                    <div class="col-12 d-flex justify-content-between">
-                                        <div class="d-block">
-                                            <h5 class="font-weight-normal m-0 p-0 col-12">Date</h5>
-                                            <h5 class="font-weight-bold">{{ date('d/m/Y',strtotime($movie->date)) }}</h5>
-                                        </div>
-                                        <div class="d-block">
-                                            <h5 class="font-weight-normal m-0 p-0 col-12 text-center">Time</h5>
-                                            <h5 class="font-weight-bold text-uppercase" style="font-size:25px"> {{ date('h:i a',strtotime($movie->time)) }} </h5>
-                                        </div>
-
-                                        <div class="d-block">
-                                            <h5 class="font-weight-normal m-0 p-0 col-12 text-center">Seat Number</h5>
-                                            <div class="col-12 d-flex justify-content-center">
-                                                <h4 class="font-weight-bold" style="font-size:30px">{{ $movie->seat }}</h4>
+                                        <div class="d-flex justify-content-between mt-2 mb-0" style="width: 500px">
+                                            <div class="d-flex">
+                                                <label class="font-weight-normal">S.No. &nbsp;:&nbsp;</label>
+                                                <h5>{{ $movie->pre_sn }}-{{ $movie->post_sn }}</h5>
+                                            </div>
+                                            <div class="d-flex">
+                                                <label class="font-weight-normal">Vat No. &nbsp;</label>
+                                                <h5>{{ settings()->get('org_vat_number', $default = '123456789') }}</h5>
                                             </div>
                                         </div>
-                                    </div>
 
-                                    <div class="col-12 d-flex justify-content-between mt-3">
-                                        <div>
-                                            {!! QrCode::size(150)->generate('2587878778') !!}
+                                        <div class="col-12 d-flex justify-content-between m-0">
+                                            <div class="d-flex">
+                                                <label class="font-weight-normal">Movie &nbsp;:&nbsp;</label>
+                                                <h5 class="font-weight-bold">{{ $movie->movie_name }}</h5>
+                                            </div>
 
                                         </div>
 
-                                        @php
-                                            $totalTax = 0;
-                                            $totalTaxPrice = 0;
-
-                                            $afterVatTaxPrice = 0;
-                                            $afterVatPrice = 0;
-                                            $priceBeforeTax = 0;
-                                        @endphp
-
-
-                                        @php
-                                            $taxs = App\Models\TaxFor::with('tax')
-                                                ->where('type_id', $movie->shows->movie->type->id)
-                                                ->get();
-                                        @endphp
-                                        @foreach ($taxs as $tax)
-                                            @if ($tax->tax->tax == 'VAT')
-                                                @php
-                                                    $taxP = 1 + $tax->tax->percentage / 100;
-                                                    $afterVatTaxPrice = $movie->price / $taxP;
-                                                @endphp
-                                            @endif
-                                        @endforeach
-                                        <div class="d-block">
+                                        <div class="d-flex justify-content-between" style="width: 500px">
                                             <div class="d-flex">
+                                                <label class="font-weight-normal">Screen &nbsp;:&nbsp;</label>
+                                                <h5>Screen 1</h5>
+                                            </div>
+                                            <div class="d-flex">
+                                                <label class="font-weight-normal">Type &nbsp;:&nbsp; </label>
+                                                <h5><b>{{ $movie->seat_type }}</b></h5>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex justify-content-between" style="width: 500px">
+                                            <div class="d-block">
+                                                <h5 class="font-weight-normal m-0 p-0 col-12">Date</h5>
+                                                <h5 class="font-weight-bold">{{ date('d/m/Y', strtotime($movie->date)) }}
+                                                </h5>
+                                            </div>
+                                            <div class="d-block">
+                                                <h5 class="font-weight-normal m-0 p-0 col-12 text-center">Time</h5>
+                                                <h5 class="font-weight-bold text-uppercase" style="font-size:25px">
+                                                    {{ date('h:i a', strtotime($movie->time)) }} </h5>
+                                            </div>
+
+                                            <div class="d-block">
+                                                <h5 class="font-weight-normal m-0 p-0 col-12 text-center">Seat Number</h5>
+                                                <div class="col-12 d-flex justify-content-center">
+                                                    <h4 class="font-weight-bold" style="font-size:30px">{{ $movie->seat }}
+                                                    </h4>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="d-flex justify-content-between mt-3" style="width: 500px">
+                                            <div>
+                                                {!! QrCode::size(150)->generate('2587878778') !!}
+
+                                            </div>
+
+                                            @php
+                                                $totalTax = 0;
+                                                $totalTaxPrice = 0;
+
+                                                $afterVatTaxPrice = 0;
+                                                $afterVatPrice = 0;
+                                                $priceBeforeTax = 0;
+                                            @endphp
+
+
+                                            @php
+                                                $taxs = App\Models\TaxFor::with('tax')
+                                                    ->where('type_id', $movie->shows->movie->type->id)
+                                                    ->get();
+                                            @endphp
+                                            @foreach ($taxs as $tax)
+                                                @if ($tax->tax->tax == 'VAT')
+                                                    @php
+                                                        $taxP = 1 + $tax->tax->percentage / 100;
+                                                        $afterVatTaxPrice = $movie->price / $taxP;
+                                                    @endphp
+                                                @endif
+                                            @endforeach
+                                            <div class="d-block">
+                                                <div class="d-flex">
+                                                    @foreach ($taxs as $tax)
+                                                        @if ($tax->tax->tax != 'VAT')
+                                                            @php
+                                                                $totalTax = $totalTax + $tax->tax->percentage;
+                                                            @endphp
+                                                        @endif
+                                                    @endforeach
+
+                                                    @php
+                                                        $taxPP = 1 + $totalTax / 100;
+                                                        $priceBeforeTax = $afterVatTaxPrice / $taxPP;
+                                                        $totalTaxPrice = $movie->price * ($totalTax / 100);
+                                                    @endphp
+
+                                                    <h5 class="font-weight-normal">Entrance Fee :</h5>
+                                                    <h5 class="font-weight-normal">&nbsp;Rs. {{ round($priceBeforeTax, 2) }}
+                                                    </h5>
+                                                </div>
+
                                                 @foreach ($taxs as $tax)
                                                     @if ($tax->tax->tax != 'VAT')
-                                                        @php
-                                                            $totalTax = $totalTax + $tax->tax->percentage;
-                                                        @endphp
+                                                        <div class="d-flex justify-content-end">
+                                                            <h5 class="font-weight-normal">{{ $tax->tax->tax }}
+                                                                ({{ $tax->tax->percentage }}%)
+                                                                :</h5>
+                                                            <h5 class="font-weight-normal">&nbsp;Rs.
+                                                                {{ round($priceBeforeTax * ($tax->tax->percentage / 100), 2) }}
+                                                            </h5>
+
+                                                        </div>
                                                     @endif
                                                 @endforeach
 
                                                 @php
-                                                    $taxPP = 1 + $totalTax / 100;
-                                                    $priceBeforeTax = $afterVatTaxPrice / $taxPP;
-                                                    $totalTaxPrice = $movie->price * ($totalTax / 100);
+                                                    $totalAmount = 0;
+                                                    $beforeVat = $movie->price + $totalTaxPrice;
                                                 @endphp
 
-                                                <h5 class="font-weight-normal">Entrance Fee :</h5>
-                                                <h5 class="font-weight-normal">&nbsp;Rs. {{ round($priceBeforeTax,2) }}
-                                                </h5>
-                                            </div>
+                                                {{-- @foreach ($movie->shows->movie->movie_has_tax as $tax) --}}
+                                                {{-- @endforeach --}}
+                                                @foreach ($taxs as $tax)
+                                                    @if ($tax->tax->tax == 'VAT')
+                                                        <div class="d-flex justify-content-end">
+                                                            <h5 class="font-weight-normal">{{ $tax->tax->tax }}
+                                                                ({{ $tax->tax->percentage }}%)
+                                                                :</h5>
+                                                            <h5 class="font-weight-normal">&nbsp;Rs.
+                                                                @php
+                                                                    $totalAmount = $beforeVat + $beforeVat * ($tax->tax->percentage / 100);
+                                                                @endphp
+                                                                {{ round($movie->price - $afterVatTaxPrice, 2) }}</h5>
 
-                                            @foreach ($taxs as $tax)
-                                                @if ($tax->tax->tax != 'VAT')
-                                                    <div class="d-flex justify-content-end">
-                                                        <h5 class="font-weight-normal">{{ $tax->tax->tax }}
-                                                            ({{ $tax->tax->percentage }}%)
-                                                            :</h5>
-                                                        <h5 class="font-weight-normal">&nbsp;Rs.
-                                                            {{ round($priceBeforeTax*($tax->tax->percentage/100), 2) }}
-                                                        </h5>
-
-                                                    </div>
-                                                @endif
-                                            @endforeach
-
-                                            @php
-                                                $totalAmount = 0;
-                                                $beforeVat = $movie->price + $totalTaxPrice;
-                                            @endphp
-
-                                            {{-- @foreach ($movie->shows->movie->movie_has_tax as $tax) --}}
-                                            {{-- @endforeach --}}
-                                            @foreach ($taxs as $tax)
-                                                @if ($tax->tax->tax == 'VAT')
-                                                    <div class="d-flex justify-content-end">
-                                                        <h5 class="font-weight-normal">{{ $tax->tax->tax }}
-                                                            ({{ $tax->tax->percentage }}%)
-                                                            :</h5>
-                                                        <h5 class="font-weight-normal">&nbsp;Rs.
-                                                            @php
-                                                                $totalAmount = $beforeVat + $beforeVat * ($tax->tax->percentage / 100);
-                                                            @endphp
-                                                            {{ round($movie->price - $afterVatTaxPrice, 2) }}</h5>
-
-                                                    </div>
-                                                @endif
-                                            @endforeach
-                                            <div class="d-flex justify-content-end">
-                                                <h5 class="font-weight-normal"><b>Total Cost :</b></h5>
-                                                <h5 class="font-weight-normal"><b> &nbsp; Rs. {{ round($movie->price, 2) }}</b>
-                                                </h5>
+                                                        </div>
+                                                    @endif
+                                                @endforeach
+                                                <div class="d-flex justify-content-end">
+                                                    <h5 class="font-weight-normal"><b>Total Cost :</b></h5>
+                                                    <h5 class="font-weight-normal"><b> &nbsp; Rs.
+                                                            {{ round($movie->price, 2) }}</b>
+                                                    </h5>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    {{-- <h3 class="text-center font-weight-bold mt-3">Copy of Original -1</h3> --}}
-                                    <label class="mt-3 font-weight-normal">Terms and Condition.</label>
-                                    <ul class="m-0 p-0 pl-3" style="position: relative;top:-5px">
-                                        <li>Tickets once sold can not be refunded.</li>
-                                        <li>Lost, Stolen or damaged tickets will not be replaced.</li>
-                                        <li>Seat allocation can not be altered after the purchase of the tickets.</li>
-                                    </ul>
+                                        {{-- <h3 class="text-center font-weight-bold mt-3">Copy of Original -1</h3> --}}
+                                        <label class="mt-3 font-weight-normal">Terms and Condition.</label>
+                                        <ul class="m-0 p-0 pl-3" style="position: relative;top:-5px">
+                                            <li>Tickets once sold can not be refunded.</li>
+                                            <li>Lost, Stolen or damaged tickets will not be replaced.</li>
+                                            <li>Seat allocation can not be altered after the purchase of the tickets.</li>
+                                        </ul>
 
-                                    <div class="col-12 d-flex justify-content-between">
-                                        <div class="d-block">
-                                            <span>Printed By : {{ Auth()->user()->name }}</span> <br>
-                                            <span class="text-uppercase">Printed By : {{ date('Y/m/d',strtotime($movie->created_at)) }} &nbsp; {{ date('h:i a',strtotime($movie->created_at)) }}</span>
-                                        </div>
-                                        <div class="d-block">
-                                            <b></b> <br>
-                                            <span>Enjoy your movie at Dhangadhi</span>
+                                        <div class="d-flex justify-content-between" style="width: 500px">
+                                            <div class="d-block">
+                                                <span>Printed By : {{ Auth()->user()->name }}</span> <br>
+                                                <span class="text-uppercase">Printed By :
+                                                    {{ date('Y/m/d', strtotime($movie->created_at)) }} &nbsp;
+                                                    {{ date('h:i a', strtotime($movie->created_at)) }}</span>
+                                            </div>
+                                            <div class="d-block">
+                                                <b></b> <br>
+                                                <span>Enjoy your movie at Dhangadhi</span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
-                    </div>
-                @endforeach
+                        </div>
+                    @endforeach
+                </div>
             </div>
-           </div>
 
             <!-- /.container-fluid -->
         </section>
@@ -435,7 +443,9 @@
                         var divId = 'printThis' + dataResult[i];
                         printDiv(divId);
                     }
-                    var url=window.location.origin;
+                    var id = '{{ $show_id }}';
+                    var url = "{{ route('seatDetail', ':id') }}";
+                    url = url.replace(':id', id);
                     window.location.href=url;
                 }
             });

@@ -34,8 +34,8 @@ class MovieShowController extends Controller
 
 
     public function edit($id){
-        $movieShow=MovieShow::where('id', $id)->first();
-        $movie=Movie::where('id', $movieShow->id)->first();
+         $movieShow=MovieShow::where('id', $id)->first();
+         $movie=Movie::where('id', $movieShow->movie_id)->first();
 
         $shows=MovieShow::where('movie_id',$movieShow->movie_id)->latest()->get();
         return view("movie.show", compact("movie","shows","movieShow"));

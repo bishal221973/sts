@@ -244,7 +244,10 @@
              $(".checkButton").prop("checked", false);
              $(this).prop("checked", true);
          } else {
+
              $("." + seatNum).prop("checked", false);
+             totalPrice=parseInt(totalPrice)-parseInt($("." + seatNum).val());
+             $('#totalPrice').text(totalPrice);
              $("." + name).removeClass('isChecked');
          }
      });

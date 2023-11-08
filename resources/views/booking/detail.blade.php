@@ -85,7 +85,7 @@
                 $showDates = 0;
             @endphp
 
-            <div class="d-flex m-0 p-0" style="width:min-content">
+            <div class="d-flex m-0 p-0" style="width:300px">
                 @foreach ($dates as $key => $date)
                     @if (today()->format('Y-m-d') <= $date)
                         <a href="#" class="myTab {{ $date == $todayDate ? 'active' : '' }}"
@@ -101,40 +101,16 @@
 
 
             </div>
-
-            {{-- <div class="col-12">
-                @if ($showDates > 0)
-                    <div class="card col-12" style="background-color: #d3d0d0">
-                        <div class="card-body d-flex justify-content-center align-items-center" style="height: 200px">
-                            <h3 class="text-uppercase" style="color: #808080">Show not available</h3>
-                        </div>
-                    </div>
-                @endif
-            </div> --}}
             <br>
 
         </div>
         <hr class="col-12">
 
-        <form action="{{ route('seatDetail') }}" method="POST">
-            @csrf
             <div class="d-flex m-0 p-0">
                 @foreach ($movie->movieShow as $show)
-                    <div
-                        class="m-0 p-0 p-3 time ml-3 badge checkButton1 badge-secondary time-list  d-none  {{ $show->id }} {{ $show->date }}  {{ $show->date == $todayDate ? 'active' : '' }}">
-                        <label class="m-0 p-0">{{ $show->time }}</label>
-                        <input class="m-0 p-0 checkButton" type="checkbox" name="show_id" value="{{ $show->id }}"
-                            id="{{ $show->id }}">
-                    </div>
+                    <a href="{{route('seatDetail',$show->id)}}" class="text-white text-uppercase btn btn-secondary ml-3 time-list d-none {{ $show->id }} {{ $show->date }}  {{ $show->date == $todayDate ? 'active' : '' }}">{{date('h:i a', strtotime($show->time))}}</a>
                 @endforeach
             </div>
-            {{-- @if ($showDates < 0) --}}
-                <div class="col-12 mt-3 d-flex justify-content-end">
-                    <input type="submit" value="Next" class="btn btn-success" name="" id="">
-                </div>
-            {{-- @endif --}}
-
-        </form>
 
     </div>
 @endsection

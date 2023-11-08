@@ -30,9 +30,8 @@ class BookingController extends Controller
         return view('booking.detail', compact('movie', 'shows'));
     }
 
-    public function seatDetail(Request $request)
+    public function seatDetail($show_id)
     {
-        $show_id = $request->show_id;
         $movie=MovieShow::with('movie')->where('id', $show_id)->first();
         $seats = Book::where('show_id', $show_id)->get();
         $bookedSeats = BookedSeat::where('movie_show_id', $show_id)->get();
@@ -75,8 +74,9 @@ class BookingController extends Controller
             // return $book;
             $bookId[$key] = $book->id;
         }
+        $show_id=$request->show_id;
         $request->session()->put('bookId', $bookId);
-        return view('booking.client', compact('bookId'));
+        return view('booking.client', compact('bookId','show_id'));
     }
 
     public function book(Request $request)
