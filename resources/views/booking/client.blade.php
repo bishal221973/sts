@@ -446,7 +446,7 @@
                     var id = '{{ $show_id }}';
                     var url = "{{ route('seatDetail', ':id') }}";
                     url = url.replace(':id', id);
-                    // window.location.href=url;
+                    window.location.href=url;
                 }
             });
         });

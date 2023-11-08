@@ -162,7 +162,9 @@
                 <div class="px-3 col-12 ">
                     <div class="col-12 card">
                         <div class="card-header">
-                            Total sold tickets
+                            <div class="bg-info p-3 rounded">
+                                <h5 class="text-uppercase m-0 p-0 text-center">Total sold tickets ({{App\Models\Book::count()}})</h5>
+                            </div>
                         </div>
                         {{-- <div class="card-body"> --}}
                         <canvas id="myChart" style="height: 450px;background-color: #fff;"></canvas>
