@@ -59,6 +59,8 @@ class HomeController extends Controller
                 'date' => $items[0]['date'],
             ];
         })->values()->sortByDesc('date')->take('10')->values()->toArray();
+        $labels[]='';
+        $data[]='';
         foreach ($groupedData as $item) {
             $labels[] = $item['date'];
             // You can adjust this line to retrieve the appropriate count or data value from your item
